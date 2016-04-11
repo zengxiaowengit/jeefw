@@ -49,7 +49,12 @@ public class BuildingInfoController extends JavaEEFrameworkBaseController<Buildi
 			
 			try{ 
 				if(entity.getCmd().equals("EDIT"))
+				{
+					BuildingInfo b = buildingInfoService.get(entity.getId());
+					entity.setLongitude(b.getLongitude());
+					entity.setLatitude(b.getLatitude());
 					buildingInfoService.update(entity);
+				}
 				else
 					buildingInfoService.persist(entity);
 				result.put("result", 1);
