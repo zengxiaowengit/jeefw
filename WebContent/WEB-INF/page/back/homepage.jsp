@@ -6,12 +6,15 @@
 
 <div id="contentmap" class="col-xs-12" style="height:550px"></div>
 
+
+
+
 <script type="text/javascript" src="${contextPath}/static/assets/js/BaiduMap.js"></script>
 
 <script type="text/javascript">
-var map = new BMap.Map("contentmap", {mapType:BMAP_PERSPECTIVE_MAP},{minZoom:15,maxZoom:18});
+var map = new BMap.Map("contentmap", {mapType:BMAP_PERSPECTIVE_MAP},{minZoom:13,maxZoom:18});
     var point = new BMap.Point(116.404, 39.915);
-    map.centerAndZoom(point, 17);
+    map.centerAndZoom(point, 16);
     map.enableScrollWheelZoom();
     map.addControl(new BMap.NavigationControl());
     map.addControl(new BMap.MapTypeControl());
@@ -151,8 +154,6 @@ var map = new BMap.Map("contentmap", {mapType:BMAP_PERSPECTIVE_MAP},{minZoom:15,
 	// 添加到地图当中
 	map.addControl(myZoomCtrl);
 </script>
-
-
 <script type="text/javascript">
 	var scripts = [ null ]
 	$('.page-content-area').ace_ajax('loadScripts', scripts, function() {

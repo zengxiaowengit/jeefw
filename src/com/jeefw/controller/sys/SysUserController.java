@@ -445,4 +445,10 @@ public class SysUserController extends JavaEEFrameworkBaseController<SysUser> im
 		
 	}
 	
+
+	//跳转到楼宇信息查询页面
+	@RequestMapping("/buildingquery")
+	public String ToBuildingList(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		return "back/buildinglist";
+	}
 }

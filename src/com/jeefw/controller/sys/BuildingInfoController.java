@@ -34,7 +34,7 @@ import core.support.QueryResult;
 @Controller
 @RequestMapping("/sys/buildinginfo")
 public class BuildingInfoController extends JavaEEFrameworkBaseController<BuildingInfo> implements Constant {
-	private static final Log log = LogFactory.getLog(SysUserController.class);
+	private static final Log log = LogFactory.getLog(BuildingInfoController.class);
 	@Resource
 	private BuildingInfoService buildingInfoService;
 	@Resource
@@ -48,23 +48,39 @@ public class BuildingInfoController extends JavaEEFrameworkBaseController<Buildi
 		Map<String, Object> result = new HashMap<String, Object>();
 			
 			try{ 
-				buildingInfoService.persist(entity);
+				if(entity.getCmd().equals("EDIT"))
+					buildingInfoService.update(entity);
+				else
+					buildingInfoService.persist(entity);
 				result.put("result", 1);
 			}catch(Exception e){
 				result.put("result", -1);
 			}	
-		
+		log.debug(result);
 		writeJSON(response, result);
 	}
 	
 	//获取json格式的楼宇数据
 	@RequestMapping(value = "/getbuildinginfo", method = { RequestMethod.POST, RequestMethod.GET })
-	public void getSysUser(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public void GetBuildingInfo(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		List<BuildingInfo> list =  buildingInfoService.doQueryAll();
+		log.debug(list);
 		writeJSON(response, list);
 	}
 	
+	@RequestMapping(value = "/deletebuildinginfo", method = { RequestMethod.POST, RequestMethod.GET })
+	public void DeleteBuildInfo(BuildingInfo entity, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		Map<String, Object> result = new HashMap<String, Object>();
+		try{ 
+			buildingInfoService.delete(entity);
+			result.put("result", 1);
+		}catch(Exception e){
+			result.put("result", -1);
+		}	
+		log.debug(result);
+		writeJSON(response, result);
+	}
 	
 	
 	

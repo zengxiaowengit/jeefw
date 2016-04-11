@@ -4,6 +4,10 @@
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}"></c:set>
 
+<link rel="stylesheet" href="${contextPath}/static/assets/js/validate/css/validate.css" />
+<script type="text/javascript" src="${contextPath}/static/assets/js/validate/talent-validate-all.js"></script>
+
+
 
 <div class="page-header">
 	<h1>
@@ -24,13 +28,13 @@
 					for="buildingname">楼宇名称<font color="red">*</font>
 				</label>
 				<div class="col-xs-4">
-					<input type="text" id="buildingname" placeholder="楼宇名称"
+					<input type="text" id="buildingname" placeholder="楼宇名称" name="buildingname"
 						class="input-large">
 				</div>
 				<label class="col-xs-2 control-label no-padding-right"
 					for="buildingsum">楼宇总套数<font color="red">*</font></label>
 				<div class="col-xs-4">
-					<input type="text" id="buildingsum" placeholder="楼宇总套数"
+					<input type="text" id="buildingsum" placeholder="楼宇总套数" name="buildingsum"
 						class="input-large">
 				</div>
 			</div>
@@ -39,13 +43,13 @@
 				<label class="col-xs-2 control-label no-padding-right"
 					for="buildingadress">楼宇坐落地址<font color="red">*</font></label>
 				<div class="col-xs-4">
-					<input type="text" id="buildingadress" placeholder="楼宇坐落地址"
+					<input type="text" id="buildingadress" placeholder="楼宇坐落地址" name="buildingadress"
 						class="input-large">
 				</div>
 				<label class="col-xs-2 control-label no-padding-right"
 					for="buildingarea">行政区划<font color="red">*</font></label>
 				<div class="col-xs-4">
-					<input type="text" id="buildingarea" placeholder="行政区划"
+					<input type="text" id="buildingarea" placeholder="行政区划" name="buildingarea"
 						class="input-large">
 				</div>
 
@@ -55,14 +59,14 @@
 				<label class="col-xs-2 control-label no-padding-right"
 					for="buildingstreet">房屋所处街乡<font color="red">*</font></label>
 				<div class="col-xs-6">
-					<input type="text" id="buildingstreet" placeholder="房屋所处街乡"
+					<input type="text" id="buildingstreet" placeholder="房屋所处街乡" name="buildingstreet"
 						class="input-xxlarge">
 				</div>
 			</div>
 
 			<div class="clearfix form-actions">
 				<div class="col-md-offset-3 col-md-9">
-					<button id="save" class="btn btn-info" type="button">
+					<button id="save" class="btn btn-info" type="button" >
 						<i class="ace-icon fa fa-check bigger-110"></i> Submit
 					</button>
 
@@ -79,9 +83,12 @@
 </div>
 
 <script type="text/javascript">
+tt.vf.req.add("buildingname","buildingsum","buildingadress","buildingarea","buildingstreet");
+	//验证表单
 	$("#save").bind("click", function() {
-		//待添加验证信息。
-		//提交楼宇信息
+		var x =  tt.validate();
+		if(x== true)
+		{
 		$.ajax({
 			dataType : "json",
 			url : "${contextPath}/sys/buildinginfo/savebuildinginfo",
@@ -102,26 +109,22 @@
 					document.location.href = "${contextPath}/sys/sysuser/home#page/homepage";
 				} else {
 				alert("添加写字楼失败！");
-				/*
-					$.gritter.add({
-						title : '系统信息',
-						text : '添加写字楼失败！',
-						class_name : 'gritter-success gritter-center'
-					});
-					*/
+				
 				}
 			}
 		});
+		}
 	});
+
 </script>
 
 
 <script type="text/javascript">
-	var scripts = [ null ]
+	var scripts = [ null ];
 	$('.page-content-area').ace_ajax('loadScripts', scripts, function() {
 		// inline scripts related to this page
 		jQuery(function($) {
-
-		})
+		
+		});
 	});
 </script>
