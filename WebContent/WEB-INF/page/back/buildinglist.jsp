@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}"></c:set>
@@ -32,7 +31,38 @@
 						<th></th>
 					</tr>
 				</thead>
+				<tbody>
+				<c:forEach items="${buildingInfoList }" var="n">
+					<tr>
+					  <td class='center'>
+					    <label class='position-relative'>
+					      <input id='b0' type='checkbox' class='ace' value='${ n.id}' />
+					      <span class='lbl'></span>
+					    </label>
+					  </td>
+					  <td>
+					    <a href='#' id='b1'>${ n.buildingName}</a>
+					  </td>
+					  <td class='hidden-480' id='b2'>${ n.roomSum}</td>
+					  <td class='hidden-480' id='b3'>${ n.buildingAdress}</td>
+					  <td class='hidden-320' id='b4'>${ n.areaDivide}</td>
+					  <td class='hidden-480' id='b5'>${ n.streetTown}</td>
+					  <td>
+					    <div class='hidden-sm hidden-xs action-buttons'>
+					      <a class='blue' href='#'>
+					        <i class='ace-icon fa fa-search-plus bigger-130'></i>
+					      </a>
+					      <a class='green' href='#modal-form'  data-toggle='modal'>
+					        <i class='ace-icon fa fa-pencil bigger-130'></i>
+					      </a>
+					      <a class='red' href='#'>
+					        <i class='ace-icon fa fa-trash-o bigger-130'></i>
+					      </a>
+					    </div>
+					</tr>
 
+            </c:forEach>
+				</tbody>
 			</table>
 		</div>
 	</div>
@@ -115,178 +145,91 @@
 	</div>
 </div>
 
-<script type="text/javascript">
-	$
-			.ajax({
-				dataType : "json",
-				url : "${contextPath}/sys/buildinginfo/getbuildinginfo",
-				type : "post",
-				complete : function(msg) {
-					if (typeof msg == undefined)
-						console.log("undefined");
-					msg = msg.responseJSON;
-					$
-							.each(
-									msg,
-									function(idx, n) {
-
-										var tTr = "<tr><td class='center'> <label class='position-relative'>"
-												+ "<input id='b0' type='checkbox' class='ace' value='"+n.id+"'/><span class='lbl'></span></label></td>"
-												+ "<td> <a href='#' id='b1'>"
-												+ n.buildingName
-												+ "</a></td>"
-												+ "<td class='hidden-480' id='b2'>"
-												+ n.roomSum
-												+ "</td><td class='hidden-480' id='b3'>"
-												+ n.buildingAdress
-												+ "</td>"
-												+ "<td class='hidden-320' id='b4'>"
-												+ n.areaDivide
-												+ "</td><td class='hidden-480' id='b5'>"
-												+ n.streetTown
-												+ "</td>"
-												+ "<td><div class='hidden-sm hidden-xs action-buttons'> <a class='blue' href='#'> <i class='ace-icon fa fa-search-plus bigger-130'>"
-												+ "</i></a><a class='green' href='#modal-form'  data-toggle='modal'><i class='ace-icon fa fa-pencil bigger-130'></i></a>"
-												+ "<a class='red' href='#'><i class='ace-icon fa fa-trash-o bigger-130'></i></a></div></tr>";
-										$("#queryBuildingTable").append(tTr);
-
-									})
-
-				},
-				error : function() {
-					alert("获取数据失败！");
-				}
-			});
-</script>
-
 
 
 <script type="text/javascript">
-	var scripts = [ null ];
-	$('.page-content-area')
-			.ace_ajax(
-					'loadScripts',
-					scripts,
-					function() {
-						//inline scripts related to this page
-						jQuery(function ($) {
-						
-							var dt = $('#queryBuildingTable')
-									//.wrap("<div class='dataTables_borderWrap' />")   //if you are applying horizontal scrolling (sScrollX)
-									.dataTable(
-											{
-												bAutoWidth : false,
-												"aoColumns" : [ {
-													"bSortable" : false
-												}, null, null, null, null,
-														null, {
-															"bSortable" : false
-														} ],
-												"aaSorting" : [],
-												"oLanguage" : {
-													"sLengthMenu" : "每页显示 _MENU_ 条记录",
-													"sZeroRecords" : "抱歉， 没有找到",
-													"sInfo" : "从 _START_ 到 _END_ /共 _TOTAL_ 条数据",
-													"sInfoEmpty" : "没有数据",
-													"sInfoFiltered" : "(从 _MAX_ 条数据中检索)",
-													"oPaginate" : {
-														"sFirst" : "首页",
-														"sPrevious" : "前一页",
-														"sNext" : "后一页",
-														"sLast" : "尾页"
-													},
-													"sZeroRecords" : "没有检索到数据"
-												}
-											});
+	var scripts = [null];
+$('.page-content-area').ace_ajax('loadScripts', scripts,
+function() {
+    //inline scripts related to this page
+    jQuery(function($) {
 
-							//全选。
-							$(document)
-									.on(
-											'click',
-											'th input:checkbox',
-											function() {
-												var that = this;
-												$(this)
-														.closest('table')
-														.find(
-																'tr > td:first-child input:checkbox')
-														.each(
-																function() {
-																	this.checked = that.checked;
-																	$(this)
-																			.closest(
-																					'tr')
-																			.toggleClass(
-																					'selected');
-																});
-											});
-							//删除一行
-							$(document).on('click','td div .red i',function() {
-							var ttr = $(this).closest('tr');
-							console.log($(ttr).children().children().children("input[id='b0']").val());
-												//console.log($(ttr).children("td[id='b2']").html());
-												$
-														.ajax({
-															dataType : "json",
-															url : "${contextPath}/sys/buildinginfo/deletebuildinginfo",
-															type : "post",
-															data : {
-																id : $(ttr)
-																		.children()
-																		.children()
-																		.children(
-																				"input[id='b0']")
-																		.val(),
-																buildingName : $(
-																		ttr)
-																		.children()
-																		.children(
-																				"a[id='b1']")
-																		.html(),
-																roomSum : $(ttr)
-																		.children(
-																				"td[id='b2']")
-																		.html(),
-																buildingAdress : $(
-																		ttr)
-																		.children(
-																				"td[id='b3']")
-																		.html(),
-																areaDivide : $(
-																		ttr)
-																		.children(
-																				"td[id='b4']")
-																		.html(),
-																streetTown : $(
-																		ttr)
-																		.children(
-																				"td[id='b5']")
-																		.html()
-															},
-															complete : function(
-																	msg) {
-																ttr.empty();
-															},
-															error : function() {
-																alert("删除数据失败！");
-															}
-														});
+        var dt = $('#queryBuildingTable')
+        //.wrap("<div class='dataTables_borderWrap' />")   //if you are applying horizontal scrolling (sScrollX)
+        .dataTable({
+            bAutoWidth: false,
+            "aoColumns": [{
+                "bSortable": false
+            },
+            null, null, null, null, null, {
+                "bSortable": false
+            }],
+            "aaSorting": [],
+            "oLanguage": {
+                "sLengthMenu": "每页显示 _MENU_ 条记录",
+                "sZeroRecords": "抱歉， 没有找到",
+                "sInfo": "从 _START_ 到 _END_ /共 _TOTAL_ 条数据",
+                "sInfoEmpty": "没有数据",
+                "sInfoFiltered": "(从 _MAX_ 条数据中检索)",
+                "oPaginate": {
+                    "sFirst": "首页",
+                    "sPrevious": "前一页",
+                    "sNext": "后一页",
+                    "sLast": "尾页"
+                },
+                "sZeroRecords": "没有检索到数据"
+            }
+        });
 
-											});
-						});
-						$(document).on('click','td div .green i',function() {
-							ttr = $(this).closest('tr');
-							$('#modal-form #id').val($(ttr).children().children().children("input[id='b0']")
-																		.val());
-							console.log($(ttr).children().children().children("input[id='b0']")
-																		.val());
-							$('#modal-form #buildingname').val($(ttr).children().children("a[id='b1']").html());
-							$('#modal-form #buildingsum').val($(ttr).children("td[id='b2']").html());
-							$('#modal-form #buildingadress').val($(ttr).children("td[id='b3']").html());
-							$('#modal-form #buildingarea').val($(ttr).children("td[id='b4']").html());
-							$('#modal-form #buildingstreet').val($(ttr).children("td[id='b5']").html());
-						});
-					});
+        //全选。
+        $(document).on('click', 'th input:checkbox',
+        function() {
+            var that = this;
+            $(this).closest('table').find('tr > td:first-child input:checkbox').each(function() {
+                this.checked = that.checked;
+                $(this).closest('tr').toggleClass('selected');
+            });
+        });
+        //删除一行
+        $(document).on('click', 'td div .red i',
+        function() {
+            var ttr = $(this).closest('tr');
+            console.log($(ttr).children().children().children("input[id='b0']").val());
+            //console.log($(ttr).children("td[id='b2']").html());
+            $.ajax({
+                dataType: "json",
+                url: "${contextPath}/sys/buildinginfo/deletebuildinginfo",
+                type: "post",
+                data: {
+                    id: $(ttr).children().children().children("input[id='b0']").val(),
+                    buildingName: $(ttr).children().children("a[id='b1']").html(),
+                    roomSum: $(ttr).children("td[id='b2']").html(),
+                    buildingAdress: $(ttr).children("td[id='b3']").html(),
+                    areaDivide: $(ttr).children("td[id='b4']").html(),
+                    streetTown: $(ttr).children("td[id='b5']").html()
+                },
+                complete: function(msg) {
+                    ttr.empty();
+                },
+                error: function() {
+                    alert("删除数据失败！");
+                }
+            });
+
+        });
+    });
+    $(document).on('click', 'td div .green i',
+    function() {
+        ttr = $(this).closest('tr');
+        $('#modal-form #id').val($(ttr).children().children().children("input[id='b0']").val());
+        console.log($(ttr).children().children().children("input[id='b0']").val());
+        $('#modal-form #buildingname').val($(ttr).children().children("a[id='b1']").html());
+        $('#modal-form #buildingsum').val($(ttr).children("td[id='b2']").html());
+        $('#modal-form #buildingadress').val($(ttr).children("td[id='b3']").html());
+        $('#modal-form #buildingarea').val($(ttr).children("td[id='b4']").html());
+        $('#modal-form #buildingstreet').val($(ttr).children("td[id='b5']").html());
+    });
+});
 </script>
 
 <script type="text/javascript">
