@@ -44,6 +44,7 @@ import com.jeefw.model.sys.Authority;
 import com.jeefw.model.sys.SysUser;
 import com.jeefw.service.sys.AttachmentService;
 import com.jeefw.service.sys.AuthorityService;
+import com.jeefw.service.sys.BuildingInfoService;
 import com.jeefw.service.sys.SysUserService;
 
 import core.support.ExtJSBaseParameter;
@@ -67,6 +68,8 @@ public class SysUserController extends JavaEEFrameworkBaseController<SysUser> im
 	private AttachmentService attachmentService;
 	@Resource
 	private AuthorityService authorityService;
+	@Resource
+	private BuildingInfoService buildingInfoService;
 
 	private static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -449,6 +452,7 @@ public class SysUserController extends JavaEEFrameworkBaseController<SysUser> im
 	//跳转到楼宇信息查询页面
 	@RequestMapping("/buildingquery")
 	public String ToBuildingList(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setAttribute("buildingInfoList", buildingInfoService.doQueryAll());
 		return "back/buildinglist";
 	}
 }

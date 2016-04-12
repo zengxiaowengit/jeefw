@@ -1,7 +1,6 @@
 package com.jeefw.controller.sys;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,11 +8,8 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
-
-import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Controller;
@@ -23,12 +19,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.jeefw.core.Constant;
 import com.jeefw.core.JavaEEFrameworkBaseController;
 import com.jeefw.model.sys.BuildingInfo;
-import com.jeefw.model.sys.SysUser;
 import com.jeefw.service.sys.AuthorityService;
 import com.jeefw.service.sys.BuildingInfoService;
-
-import core.support.JqGridPageView;
-import core.support.QueryResult;
 
 
 @Controller
@@ -48,7 +40,7 @@ public class BuildingInfoController extends JavaEEFrameworkBaseController<Buildi
 		Map<String, Object> result = new HashMap<String, Object>();
 			
 			try{ 
-				if(entity.getCmd().equals("EDIT"))
+				if(entity.getCmd()!= null && entity.getCmd().equals("EDIT"))
 				{
 					BuildingInfo b = buildingInfoService.get(entity.getId());
 					entity.setLongitude(b.getLongitude());
@@ -70,7 +62,6 @@ public class BuildingInfoController extends JavaEEFrameworkBaseController<Buildi
 	public void GetBuildingInfo(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		List<BuildingInfo> list =  buildingInfoService.doQueryAll();
-		log.debug(list);
 		writeJSON(response, list);
 	}
 	
