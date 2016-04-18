@@ -4,7 +4,6 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -13,7 +12,8 @@ import javax.persistence.TemporalType;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.hibernate.annotations.GenericGenerator;
+
+import com.jeefw.model.sys.param.CompanyInfoParameter;
 
 import core.support.ExtJSBaseParameter;
 
@@ -24,7 +24,7 @@ import core.support.ExtJSBaseParameter;
 @Table(name = "company_info", catalog = "jeefw")
 @Cache(region = "all", usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @JsonIgnoreProperties(value = { "maxResults", "firstResult", "topCount", "sortColumns", "cmd", "queryDynamicConditions", "sortedConditions", "dynamicProperties", "success", "message", "sortColumnsString", "flag" })
-public class CompanyInfo extends ExtJSBaseParameter {
+public class CompanyInfo extends CompanyInfoParameter {
 
 	// Fields
 
@@ -42,7 +42,7 @@ public class CompanyInfo extends ExtJSBaseParameter {
 	private String businessAdress;
 	private String businessAdressPhone;
 	private String legalPersonName;
-	private Integer legalPersonCertificateTypeId;
+	private String legalPersonCertificateTypeName;
 	private String legalPersonCertificateNumber;
 	private Date registerDate;
 	private String taxAuthority;
@@ -82,26 +82,27 @@ public class CompanyInfo extends ExtJSBaseParameter {
 	}
 
 	/** minimal constructor */
-	public CompanyInfo(String taxpayerIndentifyNumber, String taxpayerName,
-			String taxpayerStatus, String legalPersonName,
-			Integer legalPersonCertificateTypeId,
+	public CompanyInfo(Integer id, String taxpayerIndentifyNumber,
+			String taxpayerName, String taxpayerStatus, String legalPersonName,
+			String legalPersonCertificateTypeName,
 			String legalPersonCertificateNumber) {
+		this.id = id;
 		this.taxpayerIndentifyNumber = taxpayerIndentifyNumber;
 		this.taxpayerName = taxpayerName;
 		this.taxpayerStatus = taxpayerStatus;
 		this.legalPersonName = legalPersonName;
-		this.legalPersonCertificateTypeId = legalPersonCertificateTypeId;
+		this.legalPersonCertificateTypeName = legalPersonCertificateTypeName;
 		this.legalPersonCertificateNumber = legalPersonCertificateNumber;
 	}
 
 	/** full constructor */
-	public CompanyInfo(String taxpayerIndentifyNumber, String taxpayerName,
-			String taxpayerStatus, String taxSubjectRegisterType,
-			String registerType, String localContryType,
-			String subordinateRelation, String industry, String registerAdress,
-			String registerAdressPhone, String businessAdress,
-			String businessAdressPhone, String legalPersonName,
-			Integer legalPersonCertificateTypeId,
+	public CompanyInfo(Integer id, String taxpayerIndentifyNumber,
+			String taxpayerName, String taxpayerStatus,
+			String taxSubjectRegisterType, String registerType,
+			String localContryType, String subordinateRelation,
+			String industry, String registerAdress, String registerAdressPhone,
+			String businessAdress, String businessAdressPhone,
+			String legalPersonName, String legalPersonCertificateTypeName,
 			String legalPersonCertificateNumber, Date registerDate,
 			String taxAuthority, String taxSubAuthority, String taxAdmin,
 			String streetTown, String btToVatType, String businessScope,
@@ -115,6 +116,7 @@ public class CompanyInfo extends ExtJSBaseParameter {
 			Date businessBeginDate, Date businessEndDate, String validMark,
 			long registerNumber, String inputPerson, Date inputDate,
 			String modifiedPerson, Date modifiedDate) {
+		this.id = id;
 		this.taxpayerIndentifyNumber = taxpayerIndentifyNumber;
 		this.taxpayerName = taxpayerName;
 		this.taxpayerStatus = taxpayerStatus;
@@ -128,7 +130,7 @@ public class CompanyInfo extends ExtJSBaseParameter {
 		this.businessAdress = businessAdress;
 		this.businessAdressPhone = businessAdressPhone;
 		this.legalPersonName = legalPersonName;
-		this.legalPersonCertificateTypeId = legalPersonCertificateTypeId;
+		this.legalPersonCertificateTypeName = legalPersonCertificateTypeName;
 		this.legalPersonCertificateNumber = legalPersonCertificateNumber;
 		this.registerDate = registerDate;
 		this.taxAuthority = taxAuthority;
@@ -163,9 +165,7 @@ public class CompanyInfo extends ExtJSBaseParameter {
 	}
 
 	// Property accessors
-	@GenericGenerator(name = "generator", strategy = "increment")
 	@Id
-	@GeneratedValue(generator = "generator")
 	@Column(name = "id", unique = true, nullable = false)
 	public Integer getId() {
 		return this.id;
@@ -292,14 +292,14 @@ public class CompanyInfo extends ExtJSBaseParameter {
 		this.legalPersonName = legalPersonName;
 	}
 
-	@Column(name = "legal_person_certificate_type_id", nullable = false)
-	public Integer getLegalPersonCertificateTypeId() {
-		return this.legalPersonCertificateTypeId;
+	@Column(name = "legal_person_certificate_type_name", nullable = false, length = 40)
+	public String getLegalPersonCertificateTypeName() {
+		return this.legalPersonCertificateTypeName;
 	}
 
-	public void setLegalPersonCertificateTypeId(
-			Integer legalPersonCertificateTypeId) {
-		this.legalPersonCertificateTypeId = legalPersonCertificateTypeId;
+	public void setLegalPersonCertificateTypeName(
+			String legalPersonCertificateTypeName) {
+		this.legalPersonCertificateTypeName = legalPersonCertificateTypeName;
 	}
 
 	@Column(name = "legal_person_certificate_number", nullable = false, length = 18)

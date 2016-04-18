@@ -322,7 +322,13 @@
   <script src="${contextPath}/static/assets/js/excanvas.js"></script>
 <![endif]-->
 <script type="text/javascript">
-	var scripts = [null,"${contextPath}/static/assets/js/jquery-ui.custom.js","${contextPath}/static/assets/js/jquery.ui.touch-punch.js","${contextPath}/static/assets/js/jquery.gritter.js","${contextPath}/static/assets/js/date-time/bootstrap-datepicker.js","${contextPath}/static/assets/js/date-time/locales/bootstrap-datepicker.zh-CN.js","${contextPath}/static/assets/js/select2.js","${contextPath}/static/assets/js/x-editable/bootstrap-editable.js","${contextPath}/static/assets/js/x-editable/ace-editable.js", null]
+	var scripts = [null,"${contextPath}/static/assets/js/jquery-ui.custom.js",
+	"${contextPath}/static/assets/js/jquery.ui.touch-punch.js",
+	"${contextPath}/static/assets/js/jquery.gritter.js",
+	"${contextPath}/static/assets/js/date-time/bootstrap-datepicker.js",
+	"${contextPath}/static/assets/js/date-time/locales/bootstrap-datepicker.zh-CN.js",
+	"${contextPath}/static/assets/js/select2.js","${contextPath}/static/assets/js/x-editable/bootstrap-editable.js",
+	"${contextPath}/static/assets/js/x-editable/ace-editable.js", null]
 	$('.page-content-area').ace_ajax('loadScripts', scripts, function() {
 	    //inline scripts related to this page
 	    jQuery(function($) {

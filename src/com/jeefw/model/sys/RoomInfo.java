@@ -1,17 +1,29 @@
 package com.jeefw.model.sys;
 
-import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.codehaus.jackson.annotate.JsonBackReference;
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
-import core.support.ExtJSBaseParameter;
+import com.jeefw.model.sys.param.RoomInfoParameter;
 
 /**
  * RoomInfo entity. @author MyEclipse Persistence Tools
@@ -20,82 +32,27 @@ import core.support.ExtJSBaseParameter;
 @Table(name = "room_info", catalog = "jeefw")
 @Cache(region = "all", usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @JsonIgnoreProperties(value = { "maxResults", "firstResult", "topCount", "sortColumns", "cmd", "queryDynamicConditions", "sortedConditions", "dynamicProperties", "success", "message", "sortColumnsString", "flag" })
-
-public class RoomInfo extends ExtJSBaseParameter {
+public class RoomInfo extends RoomInfoParameter{
 
 	// Fields
 
 	private Integer id;
-	private Integer buildingId;
+	@JsonBackReference
+	private BuildingInfo buildingInfo;
 	private Integer floor;
 	private String roomNumber;
-	private String buildingSourceNumber;
-	private String propertyCertificateNumber;
-	private String groundSourceNumber;
 	private double originalValue;
 	private double roomSize;
-	private Date dateBegin;
-	private Date dateEnd;
-	private Integer housePropertyCertificateNumber;
-	private String housePropertyCertificateName;
-	private Integer certificateTypeId;
-	private Integer certificateTypeNumber;
-	private Integer valid;
-	private String buildingAdress;
-	private String areaDivide;
-	private String streetTown;
+	private String taxAuthorityName;
+	@JsonIgnore
+	private Set<RoomUseInfo> roomUseInfos = new HashSet<RoomUseInfo>(0);
 
-	// Constructors
-
-	/** default constructor */
-	public RoomInfo() {
-	}
-
-	/** minimal constructor */
-	public RoomInfo(Integer id, Integer buildingId, Integer floor,
-			String roomNumber, double originalValue, double roomSize,
-			Date dateBegin) {
-		this.id = id;
-		this.buildingId = buildingId;
-		this.floor = floor;
-		this.roomNumber = roomNumber;
-		this.originalValue = originalValue;
-		this.roomSize = roomSize;
-		this.dateBegin = dateBegin;
-	}
-
-	/** full constructor */
-	public RoomInfo(Integer id, Integer buildingId, Integer floor,
-			String roomNumber, String buildingSourceNumber,
-			String propertyCertificateNumber, String groundSourceNumber,
-			double originalValue, double roomSize, Date dateBegin,
-			Date dateEnd, Integer housePropertyCertificateNumber,
-			String housePropertyCertificateName, Integer certificateTypeId,
-			Integer certificateTypeNumber, Integer valid,
-			String buildingAdress, String areaDivide, String streetTown) {
-		this.id = id;
-		this.buildingId = buildingId;
-		this.floor = floor;
-		this.roomNumber = roomNumber;
-		this.buildingSourceNumber = buildingSourceNumber;
-		this.propertyCertificateNumber = propertyCertificateNumber;
-		this.groundSourceNumber = groundSourceNumber;
-		this.originalValue = originalValue;
-		this.roomSize = roomSize;
-		this.dateBegin = dateBegin;
-		this.dateEnd = dateEnd;
-		this.housePropertyCertificateNumber = housePropertyCertificateNumber;
-		this.housePropertyCertificateName = housePropertyCertificateName;
-		this.certificateTypeId = certificateTypeId;
-		this.certificateTypeNumber = certificateTypeNumber;
-		this.valid = valid;
-		this.buildingAdress = buildingAdress;
-		this.areaDivide = areaDivide;
-		this.streetTown = streetTown;
-	}
+	
 
 	// Property accessors
+	@GenericGenerator(name = "generator", strategy = "increment")
 	@Id
+	@GeneratedValue(generator = "generator")
 	@Column(name = "id", unique = true, nullable = false)
 	public Integer getId() {
 		return this.id;
@@ -105,13 +62,14 @@ public class RoomInfo extends ExtJSBaseParameter {
 		this.id = id;
 	}
 
-	@Column(name = "building_id", nullable = false)
-	public Integer getBuildingId() {
-		return this.buildingId;
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "building_id", nullable = false)
+	public BuildingInfo getBuildingInfo() {
+		return this.buildingInfo;
 	}
 
-	public void setBuildingId(Integer buildingId) {
-		this.buildingId = buildingId;
+	public void setBuildingInfo(BuildingInfo buildingInfo) {
+		this.buildingInfo = buildingInfo;
 	}
 
 	@Column(name = "floor", nullable = false)
@@ -132,33 +90,6 @@ public class RoomInfo extends ExtJSBaseParameter {
 		this.roomNumber = roomNumber;
 	}
 
-	@Column(name = "building_source_number", length = 30)
-	public String getBuildingSourceNumber() {
-		return this.buildingSourceNumber;
-	}
-
-	public void setBuildingSourceNumber(String buildingSourceNumber) {
-		this.buildingSourceNumber = buildingSourceNumber;
-	}
-
-	@Column(name = "property_certificate_number", length = 30)
-	public String getPropertyCertificateNumber() {
-		return this.propertyCertificateNumber;
-	}
-
-	public void setPropertyCertificateNumber(String propertyCertificateNumber) {
-		this.propertyCertificateNumber = propertyCertificateNumber;
-	}
-
-	@Column(name = "ground_source_number", length = 30)
-	public String getGroundSourceNumber() {
-		return this.groundSourceNumber;
-	}
-
-	public void setGroundSourceNumber(String groundSourceNumber) {
-		this.groundSourceNumber = groundSourceNumber;
-	}
-
 	@Column(name = "original_value", nullable = false, precision = 22, scale = 0)
 	public double getOriginalValue() {
 		return this.originalValue;
@@ -177,96 +108,23 @@ public class RoomInfo extends ExtJSBaseParameter {
 		this.roomSize = roomSize;
 	}
 
-	@Column(name = "date_begin", nullable = false, length = 19)
-	public Date getDateBegin() {
-		return this.dateBegin;
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "roomInfo")
+	@LazyCollection(LazyCollectionOption.EXTRA)
+	public Set<RoomUseInfo> getRoomUseInfos() {
+		return this.roomUseInfos;
 	}
 
-	public void setDateBegin(Date dateBegin) {
-		this.dateBegin = dateBegin;
+	public void setRoomUseInfos(Set<RoomUseInfo> roomUseInfos) {
+		this.roomUseInfos = roomUseInfos;
 	}
 
-	@Column(name = "date_end", length = 19)
-	public Date getDateEnd() {
-		return this.dateEnd;
+	@Column(name = "tax_authority_name", nullable = true, length = 40)
+	public String getTaxAuthorityName() {
+		return taxAuthorityName;
 	}
 
-	public void setDateEnd(Date dateEnd) {
-		this.dateEnd = dateEnd;
-	}
-
-	@Column(name = "house_ property_certificate_number")
-	public Integer getHousePropertyCertificateNumber() {
-		return this.housePropertyCertificateNumber;
-	}
-
-	public void setHousePropertyCertificateNumber(
-			Integer housePropertyCertificateNumber) {
-		this.housePropertyCertificateNumber = housePropertyCertificateNumber;
-	}
-
-	@Column(name = "house_ property_certificate_name")
-	public String getHousePropertyCertificateName() {
-		return this.housePropertyCertificateName;
-	}
-
-	public void setHousePropertyCertificateName(
-			String housePropertyCertificateName) {
-		this.housePropertyCertificateName = housePropertyCertificateName;
-	}
-
-	@Column(name = "certificate_type_id")
-	public Integer getCertificateTypeId() {
-		return this.certificateTypeId;
-	}
-
-	public void setCertificateTypeId(Integer certificateTypeId) {
-		this.certificateTypeId = certificateTypeId;
-	}
-
-	@Column(name = "certificate_type_number")
-	public Integer getCertificateTypeNumber() {
-		return this.certificateTypeNumber;
-	}
-
-	public void setCertificateTypeNumber(Integer certificateTypeNumber) {
-		this.certificateTypeNumber = certificateTypeNumber;
-	}
-
-	@Column(name = "valid")
-	public Integer getValid() {
-		return this.valid;
-	}
-
-	public void setValid(Integer valid) {
-		this.valid = valid;
-	}
-
-	@Column(name = "building_adress")
-	public String getBuildingAdress() {
-		return this.buildingAdress;
-	}
-
-	public void setBuildingAdress(String buildingAdress) {
-		this.buildingAdress = buildingAdress;
-	}
-
-	@Column(name = "area_divide")
-	public String getAreaDivide() {
-		return this.areaDivide;
-	}
-
-	public void setAreaDivide(String areaDivide) {
-		this.areaDivide = areaDivide;
-	}
-
-	@Column(name = "street_town")
-	public String getStreetTown() {
-		return this.streetTown;
-	}
-
-	public void setStreetTown(String streetTown) {
-		this.streetTown = streetTown;
+	public void setTaxAuthorityName(String taxAuthorityName) {
+		this.taxAuthorityName = taxAuthorityName;
 	}
 
 }

@@ -23,7 +23,6 @@ import core.support.DateTimeSerializer;
 
 /**
  * 用户的实体类
- * @框架唯一的升级和技术支持地址：http://shop111863449.taobao.com
  */
 @Entity
 @Table(name = "sys_user")

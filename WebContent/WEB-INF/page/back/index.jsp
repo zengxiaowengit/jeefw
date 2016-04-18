@@ -17,6 +17,14 @@
         <link rel="stylesheet" href="${contextPath}/static/assets/css/activities-serverload.css" />
         <!-- ace styles -->
         <link rel="stylesheet" href="${contextPath}/static/assets/css/ace.css" class="ace-main-stylesheet" id="main-ace-style" />
+        
+        <link rel="stylesheet" href="${contextPath}/static/assets/css/chosen.css" />
+		<link rel="stylesheet" href="${contextPath}/static/assets/css/datepicker.css" />
+		<link rel="stylesheet" href="${contextPath}/static/assets/css/bootstrap-timepicker.css" />
+		<link rel="stylesheet" href="${contextPath}/static/assets/css/daterangepicker.css" />
+		<link rel="stylesheet" href="${contextPath}/static/assets/css/bootstrap-datetimepicker.css" />
+		<link rel="stylesheet" href="${contextPath}/static/assets/css/colorpicker.css" />
+		
         <!--[if lte IE 9]>
 			<link rel="stylesheet" href="${contextPath}/static/assets/css/ace-part2.css" class="ace-main-stylesheet" />
 		<![endif]-->

@@ -4,16 +4,20 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.codehaus.jackson.annotate.JsonBackReference;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
-import core.support.ExtJSBaseParameter;
+import com.jeefw.model.sys.param.RoomUseInfoParameter;
 
 /**
  * RoomUseInfo entity. @author MyEclipse Persistence Tools
@@ -22,23 +26,23 @@ import core.support.ExtJSBaseParameter;
 @Table(name = "room_use_info", catalog = "jeefw")
 @Cache(region = "all", usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @JsonIgnoreProperties(value = { "maxResults", "firstResult", "topCount", "sortColumns", "cmd", "queryDynamicConditions", "sortedConditions", "dynamicProperties", "success", "message", "sortColumnsString", "flag" })
-public class RoomUseInfo extends ExtJSBaseParameter {
+public class RoomUseInfo extends RoomUseInfoParameter{
 
 	// Fields
 
 	private Integer id;
-	private Integer roomId;
-	private Integer sysUserId;
+	private SysUser sysUser;
+	@JsonBackReference
+	private RoomInfo roomInfo;
 	private Date timeStamp;
 	private Integer valid;
-	private String userName;
-	private Integer userCertificateType;
+	private String userCertificateTypeName;
 	private String userCertificateNumber;
 	private String useType;
 	private double useSize;
 	private String userHouseTaxed;
 	private String lessorName;
-	private Integer lessorCertificateTypeId;
+	private String lessorCertificateTypeName;
 	private String lessorCertificateNumber;
 	private String lessorHouseTaxed;
 	private String taxType;
@@ -49,7 +53,7 @@ public class RoomUseInfo extends ExtJSBaseParameter {
 	private Date dateEnd;
 	private String comment;
 	private String houseTaxPerson;
-	private Integer houseTaxCertificateTypeId;
+	private String houseTaxCertificateTypeName;
 	private String houseTaxCertificateNumber;
 	private double taxYear;
 	private Date taxDeadline;
@@ -61,48 +65,46 @@ public class RoomUseInfo extends ExtJSBaseParameter {
 	}
 
 	/** minimal constructor */
-	public RoomUseInfo(Integer id, Integer roomId, Integer sysUserId,
-			Date timeStamp, Integer valid, String userName,
-			Integer userCertificateType, String useType, double useSize,
-			String userHouseTaxed, String lessorHouseTaxed, Date taxDeadline) {
+	public RoomUseInfo(Integer id, SysUser sysUser, RoomInfo roomInfo,
+			Date timeStamp, Integer valid, String userCertificateTypeName,
+			String userCertificateNumber, String useType, double useSize,
+			String userHouseTaxed, Date taxDeadline) {
 		this.id = id;
-		this.roomId = roomId;
-		this.sysUserId = sysUserId;
+		this.sysUser = sysUser;
+		this.roomInfo = roomInfo;
 		this.timeStamp = timeStamp;
 		this.valid = valid;
-		this.userName = userName;
-		this.userCertificateType = userCertificateType;
+		this.userCertificateTypeName = userCertificateTypeName;
+		this.userCertificateNumber = userCertificateNumber;
 		this.useType = useType;
 		this.useSize = useSize;
 		this.userHouseTaxed = userHouseTaxed;
-		this.lessorHouseTaxed = lessorHouseTaxed;
 		this.taxDeadline = taxDeadline;
 	}
 
 	/** full constructor */
-	public RoomUseInfo(Integer id, Integer roomId, Integer sysUserId,
-			Date timeStamp, Integer valid, String userName,
-			Integer userCertificateType, String userCertificateNumber,
-			String useType, double useSize, String userHouseTaxed,
-			String lessorName, Integer lessorCertificateTypeId,
-			String lessorCertificateNumber, String lessorHouseTaxed,
-			String taxType, double yearlyRental, double orignalValue,
-			double taxFreeValue, Date dateBegin, Date dateEnd, String comment,
-			String houseTaxPerson, Integer houseTaxCertificateTypeId,
+	public RoomUseInfo(Integer id, SysUser sysUser, RoomInfo roomInfo,
+			Date timeStamp, Integer valid, String userCertificateTypeName,
+			String userCertificateNumber, String useType, double useSize,
+			String userHouseTaxed, String lessorName,
+			String lessorCertificateTypeName, String lessorCertificateNumber,
+			String lessorHouseTaxed, String taxType, double yearlyRental,
+			double orignalValue, double taxFreeValue, Date dateBegin,
+			Date dateEnd, String comment, String houseTaxPerson,
+			String houseTaxCertificateTypeName,
 			String houseTaxCertificateNumber, double taxYear, Date taxDeadline) {
 		this.id = id;
-		this.roomId = roomId;
-		this.sysUserId = sysUserId;
+		this.sysUser = sysUser;
+		this.roomInfo = roomInfo;
 		this.timeStamp = timeStamp;
 		this.valid = valid;
-		this.userName = userName;
-		this.userCertificateType = userCertificateType;
+		this.userCertificateTypeName = userCertificateTypeName;
 		this.userCertificateNumber = userCertificateNumber;
 		this.useType = useType;
 		this.useSize = useSize;
 		this.userHouseTaxed = userHouseTaxed;
 		this.lessorName = lessorName;
-		this.lessorCertificateTypeId = lessorCertificateTypeId;
+		this.lessorCertificateTypeName = lessorCertificateTypeName;
 		this.lessorCertificateNumber = lessorCertificateNumber;
 		this.lessorHouseTaxed = lessorHouseTaxed;
 		this.taxType = taxType;
@@ -113,7 +115,7 @@ public class RoomUseInfo extends ExtJSBaseParameter {
 		this.dateEnd = dateEnd;
 		this.comment = comment;
 		this.houseTaxPerson = houseTaxPerson;
-		this.houseTaxCertificateTypeId = houseTaxCertificateTypeId;
+		this.houseTaxCertificateTypeName = houseTaxCertificateTypeName;
 		this.houseTaxCertificateNumber = houseTaxCertificateNumber;
 		this.taxYear = taxYear;
 		this.taxDeadline = taxDeadline;
@@ -130,22 +132,24 @@ public class RoomUseInfo extends ExtJSBaseParameter {
 		this.id = id;
 	}
 
-	@Column(name = "room_id", nullable = false)
-	public Integer getRoomId() {
-		return this.roomId;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "sys_user_id", nullable = false)
+	public SysUser getSysUser() {
+		return this.sysUser;
 	}
 
-	public void setRoomId(Integer roomId) {
-		this.roomId = roomId;
+	public void setSysUser(SysUser sysUser) {
+		this.sysUser = sysUser;
 	}
 
-	@Column(name = "sys_user_id", nullable = false)
-	public Integer getSysUserId() {
-		return this.sysUserId;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "room_id", nullable = false)
+	public RoomInfo getRoomInfo() {
+		return this.roomInfo;
 	}
 
-	public void setSysUserId(Integer sysUserId) {
-		this.sysUserId = sysUserId;
+	public void setRoomInfo(RoomInfo roomInfo) {
+		this.roomInfo = roomInfo;
 	}
 
 	@Column(name = "time_stamp", nullable = false, length = 19)
@@ -166,25 +170,16 @@ public class RoomUseInfo extends ExtJSBaseParameter {
 		this.valid = valid;
 	}
 
-	@Column(name = "user_name", nullable = false, length = 60)
-	public String getUserName() {
-		return this.userName;
+	@Column(name = "user_certificate_type_name", nullable = false, length = 40)
+	public String getUserCertificateTypeName() {
+		return this.userCertificateTypeName;
 	}
 
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setUserCertificateTypeName(String userCertificateTypeName) {
+		this.userCertificateTypeName = userCertificateTypeName;
 	}
 
-	@Column(name = "user_certificate_type", nullable = false)
-	public Integer getUserCertificateType() {
-		return this.userCertificateType;
-	}
-
-	public void setUserCertificateType(Integer userCertificateType) {
-		this.userCertificateType = userCertificateType;
-	}
-
-	@Column(name = "user_certificate_number", length = 18)
+	@Column(name = "user_certificate_number", nullable = false, length = 21)
 	public String getUserCertificateNumber() {
 		return this.userCertificateNumber;
 	}
@@ -229,13 +224,13 @@ public class RoomUseInfo extends ExtJSBaseParameter {
 		this.lessorName = lessorName;
 	}
 
-	@Column(name = "lessor_certificate_type_id")
-	public Integer getLessorCertificateTypeId() {
-		return this.lessorCertificateTypeId;
+	@Column(name = "lessor_certificate_type_name", length = 40)
+	public String getLessorCertificateTypeName() {
+		return this.lessorCertificateTypeName;
 	}
 
-	public void setLessorCertificateTypeId(Integer lessorCertificateTypeId) {
-		this.lessorCertificateTypeId = lessorCertificateTypeId;
+	public void setLessorCertificateTypeName(String lessorCertificateTypeName) {
+		this.lessorCertificateTypeName = lessorCertificateTypeName;
 	}
 
 	@Column(name = "lessor_certificate_number", length = 18)
@@ -247,7 +242,7 @@ public class RoomUseInfo extends ExtJSBaseParameter {
 		this.lessorCertificateNumber = lessorCertificateNumber;
 	}
 
-	@Column(name = "lessor_house_taxed", nullable = false, length = 10)
+	@Column(name = "lessor_house_taxed", length = 10)
 	public String getLessorHouseTaxed() {
 		return this.lessorHouseTaxed;
 	}
@@ -328,13 +323,14 @@ public class RoomUseInfo extends ExtJSBaseParameter {
 		this.houseTaxPerson = houseTaxPerson;
 	}
 
-	@Column(name = "house_tax_certificate_type_id")
-	public Integer getHouseTaxCertificateTypeId() {
-		return this.houseTaxCertificateTypeId;
+	@Column(name = "house_tax_certificate_type_name", length = 40)
+	public String getHouseTaxCertificateTypeName() {
+		return this.houseTaxCertificateTypeName;
 	}
 
-	public void setHouseTaxCertificateTypeId(Integer houseTaxCertificateTypeId) {
-		this.houseTaxCertificateTypeId = houseTaxCertificateTypeId;
+	public void setHouseTaxCertificateTypeName(
+			String houseTaxCertificateTypeName) {
+		this.houseTaxCertificateTypeName = houseTaxCertificateTypeName;
 	}
 
 	@Column(name = "house_tax_certificate_number", length = 18)

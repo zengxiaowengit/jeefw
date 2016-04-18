@@ -30,6 +30,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -41,10 +42,17 @@ import com.jeefw.core.Constant;
 import com.jeefw.core.JavaEEFrameworkBaseController;
 import com.jeefw.model.sys.Attachment;
 import com.jeefw.model.sys.Authority;
+import com.jeefw.model.sys.BuildingInfo;
+import com.jeefw.model.sys.CertificateTypeInfo;
 import com.jeefw.model.sys.SysUser;
+import com.jeefw.service.sys.AreaDivideInfoService;
 import com.jeefw.service.sys.AttachmentService;
 import com.jeefw.service.sys.AuthorityService;
+import com.jeefw.service.sys.BuildingInfoService;
+import com.jeefw.service.sys.CertificateTypeInfoService;
+import com.jeefw.service.sys.RoomInfoService;
 import com.jeefw.service.sys.SysUserService;
+import com.jeefw.service.sys.TaxAuthorityInfoService;
 
 import core.support.ExtJSBaseParameter;
 import core.support.JqGridPageView;
@@ -67,7 +75,16 @@ public class SysUserController extends JavaEEFrameworkBaseController<SysUser> im
 	private AttachmentService attachmentService;
 	@Resource
 	private AuthorityService authorityService;
-
+	@Resource
+	private BuildingInfoService buildingInfoService;
+	@Resource
+	private RoomInfoService roomInfoService;
+	@Resource
+	private CertificateTypeInfoService certificateTypeInfoService;
+	@Resource
+	private AreaDivideInfoService areaDivideService;
+	@Resource
+	private TaxAuthorityInfoService taxAuthorityInfoService;
 	private static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
 	// 登录
@@ -440,15 +457,39 @@ public class SysUserController extends JavaEEFrameworkBaseController<SysUser> im
 
 	@RequestMapping("/addbuilding")
 	public String addBuilding(HttpServletRequest request, HttpServletResponse response) throws IOException{
-		
+		request.setAttribute("certificateTypeInfoList", certificateTypeInfoService.doQueryAll());
+		request.setAttribute("areaDivideInfoList",areaDivideService.doQueryAll());
 		return "back/addbuilding";
 		
 	}
 	
-
 	//跳转到楼宇信息查询页面
 	@RequestMapping("/buildingquery")
 	public String ToBuildingList(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setAttribute("buildingInfoList", buildingInfoService.doQueryAll());
+		request.setAttribute("certificateTypeInfoList", certificateTypeInfoService.doQueryAll());
+		request.setAttribute("areaDivideInfoList",areaDivideService.doQueryAll());
 		return "back/buildinglist";
 	}
+	
+	
+	@RequestMapping(value="/roomquery/{buildingId}/{floor}",method={RequestMethod.POST,RequestMethod.GET})
+	public String ToRoomList(@PathVariable int buildingId,@PathVariable int floor, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		Object []value = {buildingId,floor};
+		value[0] = buildingInfoService.get(buildingId);
+		String []con = {"buildingInfo","floor"};
+		request.setAttribute("roomInfoList", roomInfoService.queryByProerties(con, value));
+		request.setAttribute("floor", floor);
+		request.setAttribute("taxAuthorityList", taxAuthorityInfoService.doQueryAll());
+		return "back/roomlist";
+	}
+	
+	@RequestMapping("/roomnav/{buildingId}")
+	public String roomNavigation(@PathVariable int buildingId, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setAttribute("floorSum", buildingInfoService.get(buildingId).getFloorSum());
+		return "back/roomnav";
+	}
+	
+	
+	
 }

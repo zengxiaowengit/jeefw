@@ -8,9 +8,10 @@
 <script type="text/javascript" src="${contextPath}/static/assets/js/validate/talent-validate-all.js"></script>
 
 
+
 <div class="page-header">
 	<h1>
-		添加房间 <small> <i class="ace-icon fa fa-angle-double-right"></i>
+		添加房产 <small> <i class="ace-icon fa fa-angle-double-right"></i>
 			基础信息
 		</small>
 	</h1>
@@ -23,12 +24,65 @@
 		<form class="form-horizontal" role="form">
 			<div class="hr hr-18 dotted hr-double"></div>
 			<div class="form-group">
-				
+				<label class="col-xs-2 control-label no-padding-right"
+					for="buildingname">楼宇名称<font color="red">*</font>
+				</label>
+				<div class="col-xs-4">
+					<input type="text" id="buildingname" placeholder="楼宇名称" 
+						class="input-large">
+				</div>
+				<label class="col-xs-2 control-label no-padding-right"
+					for="buildingsum">楼宇总套数<font color="red">*</font></label>
+				<div class="col-xs-4">
+					<input type="text" id="buildingsum" placeholder="楼宇总套数" 
+						class="input-large">
+				</div>
 			</div>
-			
+			<div class="form-group">
+
+				<label class="col-xs-2 control-label no-padding-right"
+					for="buildingadress">楼宇坐落地址<font color="red">*</font></label>
+				<div class="col-xs-4">
+					<input type="text" id="buildingadress" placeholder="楼宇坐落地址" 
+						class="input-large">
+				</div>
+				<label class="col-xs-2 control-label no-padding-right"
+					for="buildingarea">行政区划<font color="red">*</font></label>
+				<div class="col-xs-4">
+					<input type="text" id="buildingarea" placeholder="行政区划"
+						class="input-large">
+				</div>
+
+			</div>
+
+			<div class="form-group">
+				<label class="col-xs-2 control-label no-padding-right"
+					for="buildingstreet">房屋所处街乡<font color="red">*</font></label>
+				<div class="col-xs-6">
+					<input type="text" id="buildingstreet" placeholder="房屋所处街乡"
+						class="input-xxlarge">
+				</div>
+			</div>
+
+			<div class="clearfix form-actions">
+				<div class="col-md-offset-3 col-md-9">
+					<button id="save" class="btn btn-info" type="button" >
+						<i class="ace-icon fa fa-check bigger-110"></i> Submit
+					</button>
+
+					&nbsp; &nbsp; &nbsp;
+					<button id="reset" class="btn" type="reset">
+						<i class="ace-icon fa fa-undo bigger-110"></i> Reset
+					</button>
+				</div>
+			</div>
+
+
 		</form>
 	</div>
 </div>
+
+
 
 
 <script type="text/javascript">

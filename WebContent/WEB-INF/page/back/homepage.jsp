@@ -12,13 +12,15 @@
 <script type="text/javascript" src="${contextPath}/static/assets/js/BaiduMap.js"></script>
 
 <script type="text/javascript">
-var map = new BMap.Map("contentmap", {mapType:BMAP_PERSPECTIVE_MAP},{minZoom:13,maxZoom:18});
-    var point = new BMap.Point(116.404, 39.915);
+var map = new BMap.Map("contentmap", 
+		{mapType:BMAP_NORMAL_MAP},{minZoom:13,maxZoom:18});//卫星地图BMAP_SATELLITE_MAP
+    var point = new BMap.Point(113.733311, 34.778249);
     map.centerAndZoom(point, 16);
     map.enableScrollWheelZoom();
     map.addControl(new BMap.NavigationControl());
     map.addControl(new BMap.MapTypeControl());
-    map.setCurrentCity("北京市");  //设置当前城市
+    map.setCenter(point);
+    //map.setCurrentCity("郑州市");  //设置当前城市
     //ajax获取已有楼宇信息
    
     $.ajax({
@@ -80,7 +82,37 @@ var map = new BMap.Map("contentmap", {mapType:BMAP_PERSPECTIVE_MAP},{minZoom:13,
 				        this.getElementsByTagName("span")[0].innerHTML = that._text;
 				        arrow.style.backgroundPosition = "0px 0px";
 				      }
-				
+				     
+				     div.onclick = function(e){
+				     	var src = $(e.srcElement).html();
+				     	console.log(src);
+					  	var x = map.getOverlays();
+						console.log(x);
+						$.each(x,function(){
+							if(this._text==src){
+								urlString = "${contextPath}/sys/buildinginfo/getbuildingid/"+this._point.lng+"/"+this._point.lat+"/1";
+								console.log(urlString);
+								$.ajax({
+									dataType : "json",
+									url : urlString,
+									type : "post",
+									complete : function(xmlRequest) {
+										var returninfo = eval("(" + xmlRequest.responseText + ")");
+										console.log(returninfo.result);
+										if (returninfo.result > 0 ) {
+											urlString = "${contextPath}/sys/sysuser/home#page/roomnav/"+returninfo.result;
+											location.href=urlString;
+										} else {
+											alert("导航失败！");
+										}
+									}
+								});
+							}
+						});
+					  
+						//alert("clicked");
+					  }
+				     	
 				      map.getPanes().labelPane.appendChild(div);
 				      
 				      return div;
@@ -91,8 +123,14 @@ var map = new BMap.Map("contentmap", {mapType:BMAP_PERSPECTIVE_MAP},{minZoom:13,
 				      this._div.style.left = pixel.x - parseInt(this._arrow.style.left) + "px";
 				      this._div.style.top  = pixel.y - 30 + "px";
 				    }
+				    
+				    ComplexCustomOverlay.prototype.addEventListener = function(event,fun){  
+			            this._div['on'+event] = fun;  
+			        }  
 					var myCompOverlay = new ComplexCustomOverlay(point,item.buildingName,item.buildingName);
+					
 					map.addOverlay(myCompOverlay);
+					
 					/*var opts = {
 	  				position : point,    // 指定文本标注所在的地理位置
 	 			 	offset   : new BMap.Size(10, -10)    //设置文本偏移量
