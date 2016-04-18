@@ -10,10 +10,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-<<<<<<< HEAD
 import javax.transaction.Transactional;
-=======
->>>>>>> origin/master
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -30,19 +27,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.jeefw.core.Constant;
 import com.jeefw.core.JavaEEFrameworkBaseController;
 import com.jeefw.model.sys.BuildingInfo;
-<<<<<<< HEAD
 import com.jeefw.model.sys.CertificateTypeInfo;
-=======
->>>>>>> origin/master
 import com.jeefw.service.sys.AuthorityService;
 import com.jeefw.service.sys.BuildingInfoService;
 import com.jeefw.service.sys.CertificateTypeInfoService;
 
-<<<<<<< HEAD
 import core.support.BaseParameter;
 
-=======
->>>>>>> origin/master
 
 @Controller
 @RequestMapping("/sys/buildinginfo")
@@ -61,14 +52,9 @@ public class BuildingInfoController extends JavaEEFrameworkBaseController<Buildi
 		Map<String, Object> result = new HashMap<String, Object>();
 			
 			try{ 
-<<<<<<< HEAD
 				CertificateTypeInfo c = certificateTypeInfoService.get(entity.getHouseCertificateTypeCode());
 				entity.setCertificateTypeInfo(c);
 				if(entity.getCmd()!= null && entity.getCmd().equals("EDIT")){
-=======
-				if(entity.getCmd()!= null && entity.getCmd().equals("EDIT"))
-				{
->>>>>>> origin/master
 					BuildingInfo b = buildingInfoService.get(entity.getId());
 					entity.setLongitude(b.getLongitude());
 					entity.setLatitude(b.getLatitude());

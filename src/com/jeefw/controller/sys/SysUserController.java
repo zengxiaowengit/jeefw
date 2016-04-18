@@ -49,11 +49,8 @@ import com.jeefw.service.sys.AreaDivideInfoService;
 import com.jeefw.service.sys.AttachmentService;
 import com.jeefw.service.sys.AuthorityService;
 import com.jeefw.service.sys.BuildingInfoService;
-<<<<<<< HEAD
 import com.jeefw.service.sys.CertificateTypeInfoService;
 import com.jeefw.service.sys.RoomInfoService;
-=======
->>>>>>> origin/master
 import com.jeefw.service.sys.SysUserService;
 import com.jeefw.service.sys.TaxAuthorityInfoService;
 
@@ -80,7 +77,6 @@ public class SysUserController extends JavaEEFrameworkBaseController<SysUser> im
 	private AuthorityService authorityService;
 	@Resource
 	private BuildingInfoService buildingInfoService;
-<<<<<<< HEAD
 	@Resource
 	private RoomInfoService roomInfoService;
 	@Resource
@@ -89,9 +85,6 @@ public class SysUserController extends JavaEEFrameworkBaseController<SysUser> im
 	private AreaDivideInfoService areaDivideService;
 	@Resource
 	private TaxAuthorityInfoService taxAuthorityInfoService;
-=======
-
->>>>>>> origin/master
 	private static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
 	// 登录
@@ -474,11 +467,8 @@ public class SysUserController extends JavaEEFrameworkBaseController<SysUser> im
 	@RequestMapping("/buildingquery")
 	public String ToBuildingList(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setAttribute("buildingInfoList", buildingInfoService.doQueryAll());
-<<<<<<< HEAD
 		request.setAttribute("certificateTypeInfoList", certificateTypeInfoService.doQueryAll());
 		request.setAttribute("areaDivideInfoList",areaDivideService.doQueryAll());
-=======
->>>>>>> origin/master
 		return "back/buildinglist";
 	}
 	
