@@ -50,12 +50,17 @@
 					    </label>
 					  </td>
 					  <td>
+<<<<<<< HEAD
 					    <a href='${contextPath}/sys/sysuser/home#page/roomnav/${n.id}' id='b1'>${ n.buildingName}</a>
+=======
+					    <a href='#' id='b1'>${ n.buildingName}</a>
+>>>>>>> origin/master
 					  </td>
 					  <td class='hidden-480' id='b2'>${ n.roomSum}</td>
 					  <td class='hidden-480' id='b3'>${ n.buildingAdress}</td>
 					  <td class='hidden-320' id='b4'>${ n.areaDivide}</td>
 					  <td class='hidden-480' id='b5'>${ n.streetTown}</td>
+<<<<<<< HEAD
 					  <td class='hidden-480' id='b6'>${ n.buildingSourceNumber}</td>
 					  <td class='hidden-480' id='b7'>${ n.propertyCertificateNumber}</td>
 					  <td class='hidden-480' id='b8'>${ n.groundSourceNumber}</td>
@@ -68,6 +73,8 @@
 					  	${ n.certificateTypeInfo.certificateTypeName}
 					  	<input id='b140' type='hidden' value='${ n.certificateTypeInfo.certificateTypeCode}'></td>
 					  <td class='hidden-480' id='b15'>${ n.houseCertificateTypeNumber}</td>
+=======
+>>>>>>> origin/master
 					  <td>
 					    <div class='hidden-sm hidden-xs action-buttons'>
 					      <a class='blue' href='#'>
@@ -255,12 +262,17 @@
 
 
 <script type="text/javascript">
+<<<<<<< HEAD
 	var scripts = [null,"${contextPath}/static/assets/js/date-time/bootstrap-datepicker.js",
 	"${contextPath}/static/assets/js/date-time/locales/bootstrap-datepicker.zh-CN.js",null ];
+=======
+	var scripts = [null];
+>>>>>>> origin/master
 $('.page-content-area').ace_ajax('loadScripts', scripts,
 function() {
     //inline scripts related to this page
     jQuery(function($) {
+<<<<<<< HEAD
 		$('#datebegin').datepicker({
 	    	    format: 'yyyy-mm-dd',
 	    	    language: 'zh-CN'
@@ -273,6 +285,19 @@ function() {
         //.wrap("<div class='dataTables_borderWrap' />")   //if you are applying horizontal scrolling (sScrollX)
         .dataTable({
             bAutoWidth: true,
+=======
+
+        var dt = $('#queryBuildingTable')
+        //.wrap("<div class='dataTables_borderWrap' />")   //if you are applying horizontal scrolling (sScrollX)
+        .dataTable({
+            bAutoWidth: false,
+            "aoColumns": [{
+                "bSortable": false
+            },
+            null, null, null, null, null, {
+                "bSortable": false
+            }],
+>>>>>>> origin/master
             "aaSorting": [],
             "oLanguage": {
                 "sLengthMenu": "每页显示 _MENU_ 条记录",
@@ -287,9 +312,13 @@ function() {
                     "sLast": "尾页"
                 },
                 "sZeroRecords": "没有检索到数据"
+<<<<<<< HEAD
             },
             "sScrollX":"200%",
             "bScrollCollapse":true
+=======
+            }
+>>>>>>> origin/master
         });
 
         //全选。
@@ -300,7 +329,10 @@ function() {
                 this.checked = that.checked;
                 $(this).closest('tr').toggleClass('selected');
             });
+<<<<<<< HEAD
             
+=======
+>>>>>>> origin/master
         });
         //删除一行
         $(document).on('click', 'td div .red i',
@@ -321,6 +353,7 @@ function() {
                     streetTown: $(ttr).children("td[id='b5']").html()
                 },
                 complete: function(msg) {
+<<<<<<< HEAD
                 	var returninfo = eval("(" + msg.responseText + ")");
 					if (returninfo.result == 1) {
 						ttr.empty();
@@ -330,22 +363,36 @@ function() {
                 },
                 error: function() {
                     console.log("删除楼宇失败！");
+=======
+                    ttr.empty();
+                },
+                error: function() {
+                    alert("删除数据失败！");
+>>>>>>> origin/master
                 }
             });
 
         });
     });
+<<<<<<< HEAD
     //修改信息
+=======
+>>>>>>> origin/master
     $(document).on('click', 'td div .green i',
     function() {
         ttr = $(this).closest('tr');
         $('#modal-form #id').val($(ttr).children().children().children("input[id='b0']").val());
+<<<<<<< HEAD
         //console.log($(ttr).children("td[id='b14']").html());
+=======
+        console.log($(ttr).children().children().children("input[id='b0']").val());
+>>>>>>> origin/master
         $('#modal-form #buildingname').val($(ttr).children().children("a[id='b1']").html());
         $('#modal-form #buildingsum').val($(ttr).children("td[id='b2']").html());
         $('#modal-form #buildingadress').val($(ttr).children("td[id='b3']").html());
         $('#modal-form #buildingarea').val($(ttr).children("td[id='b4']").html());
         $('#modal-form #buildingstreet').val($(ttr).children("td[id='b5']").html());
+<<<<<<< HEAD
         //start
         $('#modal-form #buildingsourcenumber').val($(ttr).children("td[id='b6']").html());
         $('#modal-form #propertycertificatenumber').val($(ttr).children("td[id='b7']").html());
@@ -360,6 +407,8 @@ function() {
         $('#modal-form #housecertificatetypename').val(val);
         $('#modal-form #housecertificatetypenumber').val($(ttr).children("td[id='b15']").html());
         
+=======
+>>>>>>> origin/master
     });
 });
 </script>
