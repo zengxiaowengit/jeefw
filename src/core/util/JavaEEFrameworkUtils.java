@@ -8,7 +8,6 @@ import org.apache.commons.lang.math.RandomUtils;
 
 /**
  * 框架的Utils
- * @框架唯一的升级和技术支持地址：http://shop111863449.taobao.com
  */
 public class JavaEEFrameworkUtils {
 

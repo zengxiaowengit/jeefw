@@ -7,7 +7,6 @@ import org.apache.commons.beanutils.Converter;
 import org.apache.commons.lang.time.DateUtils;
 
 /**
- * @框架唯一的升级和技术支持地址：http://shop111863449.taobao.com
  */
 public class JavaUtilDateConverter implements Converter {
 

@@ -44,6 +44,7 @@ import com.jeefw.model.sys.Attachment;
 import com.jeefw.model.sys.Authority;
 import com.jeefw.model.sys.BuildingInfo;
 import com.jeefw.model.sys.CertificateTypeInfo;
+import com.jeefw.model.sys.RoomInfo;
 import com.jeefw.model.sys.SysUser;
 import com.jeefw.service.sys.AreaDivideInfoService;
 import com.jeefw.service.sys.AttachmentService;
@@ -51,6 +52,7 @@ import com.jeefw.service.sys.AuthorityService;
 import com.jeefw.service.sys.BuildingInfoService;
 import com.jeefw.service.sys.CertificateTypeInfoService;
 import com.jeefw.service.sys.RoomInfoService;
+import com.jeefw.service.sys.RoomUseInfoService;
 import com.jeefw.service.sys.SysUserService;
 import com.jeefw.service.sys.TaxAuthorityInfoService;
 
@@ -62,7 +64,6 @@ import core.util.MD5;
 
 /**
  * 用户的控制层
- * @框架唯一的升级和技术支持地址：http://shop111863449.taobao.com
  */
 @Controller
 @RequestMapping("/sys/sysuser")
@@ -85,6 +86,9 @@ public class SysUserController extends JavaEEFrameworkBaseController<SysUser> im
 	private AreaDivideInfoService areaDivideService;
 	@Resource
 	private TaxAuthorityInfoService taxAuthorityInfoService;
+	@Resource
+	private RoomUseInfoService roomUseInfoService;
+	
 	private static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
 	// 登录
@@ -455,6 +459,7 @@ public class SysUserController extends JavaEEFrameworkBaseController<SysUser> im
 		return "back/homepage";
 	}
 
+	//添加楼宇
 	@RequestMapping("/addbuilding")
 	public String addBuilding(HttpServletRequest request, HttpServletResponse response) throws IOException{
 		request.setAttribute("certificateTypeInfoList", certificateTypeInfoService.doQueryAll());
@@ -472,7 +477,7 @@ public class SysUserController extends JavaEEFrameworkBaseController<SysUser> im
 		return "back/buildinglist";
 	}
 	
-	
+	//查询房间信息
 	@RequestMapping(value="/roomquery/{buildingId}/{floor}",method={RequestMethod.POST,RequestMethod.GET})
 	public String ToRoomList(@PathVariable int buildingId,@PathVariable int floor, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		Object []value = {buildingId,floor};
@@ -484,12 +489,20 @@ public class SysUserController extends JavaEEFrameworkBaseController<SysUser> im
 		return "back/roomlist";
 	}
 	
+	//查询房间信息之前的导航页面
 	@RequestMapping("/roomnav/{buildingId}")
 	public String roomNavigation(@PathVariable int buildingId, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setAttribute("floorSum", buildingInfoService.get(buildingId).getFloorSum());
 		return "back/roomnav";
 	}
 	
+	//查询房间使用信息
+	@RequestMapping(value = "/getroomuseinfo/{roomid}", method = { RequestMethod.POST, RequestMethod.GET })
+	public String GetRoomInfo(@PathVariable int roomid,HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setAttribute("roomUseInfo",roomUseInfoService.queryByProerties("roomInfo", roomInfoService.get(roomid)));
+		request.setAttribute("certificateTypeInfoList", certificateTypeInfoService.doQueryAll());
+		return "back/roomuseinfo";
+	}
 	
 	
 }

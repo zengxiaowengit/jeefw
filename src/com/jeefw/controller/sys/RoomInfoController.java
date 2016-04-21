@@ -56,7 +56,7 @@ public class RoomInfoController extends JavaEEFrameworkBaseController<RoomInfo> 
 	writeJSON(response, result);
 	}
 	
-	//获取json格式的楼宇数据
+	//获取json格式的数据
 	
 	@RequestMapping(value = "/getroominfo", method = { RequestMethod.POST, RequestMethod.GET })
 	public void GetRoomInfo(HttpServletRequest request, HttpServletResponse response) throws Exception {

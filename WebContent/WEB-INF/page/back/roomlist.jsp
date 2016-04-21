@@ -17,8 +17,9 @@
 		楼宇信息 <small> <i class="ace-icon fa fa-angle-double-right"></i>第</small>
 		${floor }
 		<small>层房间信息
-		</small>
+		</small><button id='modal-add' class="btn btn-info">添加房间</button>
 	</h1>
+	
 </div>
 <!-- /.page-header -->
 <a id="refresh" href='#' style="visibility: hidden;"><span id='refresh1'>refresh</span></a>
@@ -50,7 +51,7 @@
 					    </label>
 					  </td>
 					  <td>
-						  <a href='#' id='roomnumber'>${ n.roomNumber}</a>
+						  <a href='${contextPath}/sys/sysuser/home#page/getroomuseinfo/${n.id}' id='roomnumber'>${ n.roomNumber}</a>
 					  </td>
 					  <td class='hidden-480' id='originalvalue'>${ n.originalValue}</td>
 					  <td class='hidden-480' id=roomsize>${ n.roomSize}</td>
@@ -78,7 +79,7 @@
 
 <div class="row">
 	<div class="col-xs-12">
-		<button id='modal-add' class="btn btn-info">添加房间</button>
+		
 		<a id="alink" href='#modal-form-add' data-toggle='modal' style="visibility: hidden;"></a>
 		<input id='addflag' type='hidden' value='edit'/>
 	</div>

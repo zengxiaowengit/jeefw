@@ -6,7 +6,6 @@ import com.app.bean.BaseRequestBean;
 
 /**
  * APP接口的业务逻辑执行引擎接口
- * @框架唯一的升级和技术支持地址：http://shop111863449.taobao.com
  */
 public interface ILogicExecuteWorkerEngine {
 

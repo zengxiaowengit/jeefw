@@ -8,7 +8,6 @@ import core.support.ExtJSBaseParameter;
 
 /**
  * 菜单的参数类
- * @框架唯一的升级和技术支持地址：http://shop111863449.taobao.com
  */
 public class AuthorityParameter extends ExtJSBaseParameter {
 

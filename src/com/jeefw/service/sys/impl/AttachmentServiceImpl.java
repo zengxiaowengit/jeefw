@@ -14,7 +14,6 @@ import core.service.BaseService;
 
 /**
  * 附件的业务逻辑层的实现
- * @框架唯一的升级和技术支持地址：http://shop111863449.taobao.com
  */
 @Service
 public class AttachmentServiceImpl extends BaseService<Attachment> implements AttachmentService {

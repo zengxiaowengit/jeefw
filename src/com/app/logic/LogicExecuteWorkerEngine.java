@@ -14,7 +14,6 @@ import com.google.gson.stream.JsonReader;
 
 /**
  * APP接口的业务逻辑执行引擎接口的实现类
- * @框架唯一的升级和技术支持地址：http://shop111863449.taobao.com
  */
 public class LogicExecuteWorkerEngine implements ILogicExecuteWorkerEngine {
 

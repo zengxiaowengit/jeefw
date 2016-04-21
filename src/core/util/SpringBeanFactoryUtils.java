@@ -13,8 +13,7 @@ import com.jeefw.core.Constant;
 
 /**
  * SpringBeanFactory容器的Utils
- * @框架唯一的升级和技术支持地址：http://shop111863449.taobao.com
- */
+ **/
 public class SpringBeanFactoryUtils implements BeanFactoryAware {
 
 	private static BeanFactory beanFactory = null;

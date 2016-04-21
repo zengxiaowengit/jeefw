@@ -5,6 +5,7 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -16,6 +17,7 @@ import org.codehaus.jackson.annotate.JsonBackReference;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.GenericGenerator;
 
 import com.jeefw.model.sys.param.RoomUseInfoParameter;
 
@@ -36,6 +38,7 @@ public class RoomUseInfo extends RoomUseInfoParameter{
 	private RoomInfo roomInfo;
 	private Date timeStamp;
 	private Integer valid;
+	private String userName;
 	private String userCertificateTypeName;
 	private String userCertificateNumber;
 	private String useType;
@@ -122,7 +125,9 @@ public class RoomUseInfo extends RoomUseInfoParameter{
 	}
 
 	// Property accessors
+	@GenericGenerator(name = "generator", strategy = "increment")
 	@Id
+	@GeneratedValue(generator = "generator")
 	@Column(name = "id", unique = true, nullable = false)
 	public Integer getId() {
 		return this.id;
@@ -132,7 +137,7 @@ public class RoomUseInfo extends RoomUseInfoParameter{
 		this.id = id;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "sys_user_id", nullable = false)
 	public SysUser getSysUser() {
 		return this.sysUser;
@@ -142,7 +147,7 @@ public class RoomUseInfo extends RoomUseInfoParameter{
 		this.sysUser = sysUser;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "room_id", nullable = false)
 	public RoomInfo getRoomInfo() {
 		return this.roomInfo;
@@ -168,6 +173,15 @@ public class RoomUseInfo extends RoomUseInfoParameter{
 
 	public void setValid(Integer valid) {
 		this.valid = valid;
+	}
+
+	@Column(name = "user_name", nullable = false, length = 15)
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
 	@Column(name = "user_certificate_type_name", nullable = false, length = 40)
@@ -287,7 +301,8 @@ public class RoomUseInfo extends RoomUseInfoParameter{
 		this.taxFreeValue = taxFreeValue;
 	}
 
-	@Column(name = "date_begin", length = 19)
+	@Temporal(TemporalType.DATE)
+	@Column(name = "date_begin", length = 10)
 	public Date getDateBegin() {
 		return this.dateBegin;
 	}
@@ -296,7 +311,8 @@ public class RoomUseInfo extends RoomUseInfoParameter{
 		this.dateBegin = dateBegin;
 	}
 
-	@Column(name = "date_end", length = 19)
+	@Temporal(TemporalType.DATE)
+	@Column(name = "date_end", length = 10)
 	public Date getDateEnd() {
 		return this.dateEnd;
 	}

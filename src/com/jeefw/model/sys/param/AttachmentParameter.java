@@ -4,7 +4,6 @@ import core.support.ExtJSBaseParameter;
 
 /**
  * 附件的参数类
- * @框架唯一的升级和技术支持地址：http://shop111863449.taobao.com
  */
 public class AttachmentParameter extends ExtJSBaseParameter {
 

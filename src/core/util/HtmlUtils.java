@@ -6,7 +6,6 @@ import org.apache.commons.lang.StringUtils;
 
 /**
  * 处理HTML代码
- * @框架唯一的升级和技术支持地址：http://shop111863449.taobao.com
  */
 public class HtmlUtils {
 

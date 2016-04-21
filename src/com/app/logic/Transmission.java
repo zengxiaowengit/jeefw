@@ -16,7 +16,6 @@ import com.google.gson.Gson;
 
 /**
  * APP接口的协议传输接口的实现类
- * @框架唯一的升级和技术支持地址：http://shop111863449.taobao.com
  */
 public class Transmission implements ITransmission {
 

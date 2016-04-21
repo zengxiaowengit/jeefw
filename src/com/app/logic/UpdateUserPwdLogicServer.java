@@ -8,7 +8,6 @@ import com.jeefw.service.sys.SysUserService;
 
 /**
  * APP接口的业务处理逻辑封装接口的实现类（根据用户名更改密码）
- * @框架唯一的升级和技术支持地址：http://shop111863449.taobao.com
  */
 public class UpdateUserPwdLogicServer implements ILogicFace<UpdateUserPwdRequestBean, UpdateUserPwdResponseBean> {
 

@@ -6,7 +6,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 
 /**
- * @框架唯一的升级和技术支持地址：http://shop111863449.taobao.com
  */
 public class GetHttpServletRequestWrapper extends HttpServletRequestWrapper {
 

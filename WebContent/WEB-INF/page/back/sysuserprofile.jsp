@@ -12,7 +12,10 @@
 <div class="page-header">
 	<h1>
 		个人资料页面
-		
+		<small>
+			<i class="ace-icon fa fa-angle-double-right"></i>
+			2种在线编辑风格
+		</small>
 	</h1>
 </div><!-- /.page-header -->
 
@@ -20,12 +23,19 @@
 	<div class="col-xs-12">
 		<!-- PAGE CONTENT BEGINS -->
 		<div class="clearfix">
-			
+			<div class="pull-left alert alert-success no-margin">
+				<button type="button" class="close" data-dismiss="alert">
+					<i class="ace-icon fa fa-times"></i>
+				</button>
+
+				<i class="ace-icon fa fa-umbrella bigger-120 blue"></i>
+				点击下面的图片或字段编辑 ... &nbsp;&nbsp;
+			</div>
 
 			<div class="pull-right">
-				
+				<span class="green middle bolder">切换编辑: &nbsp;</span>
 
-				<div class="hide">
+				<div class="btn-toolbar inline middle no-margin">
 					<div data-toggle="buttons" class="btn-group no-margin">
 						<label class="btn btn-sm btn-yellow active">
 							<span class="bigger-110">1</span>
@@ -33,7 +43,7 @@
 							<input type="radio" value="1" />
 						</label>
 
-						<label class="btn btn-sm btn-yellow ">
+						<label class="btn btn-sm btn-yellow">
 							<span class="bigger-110">2</span>
 
 							<input type="radio" value="3" />
@@ -322,13 +332,7 @@
   <script src="${contextPath}/static/assets/js/excanvas.js"></script>
 <![endif]-->
 <script type="text/javascript">
-	var scripts = [null,"${contextPath}/static/assets/js/jquery-ui.custom.js",
-	"${contextPath}/static/assets/js/jquery.ui.touch-punch.js",
-	"${contextPath}/static/assets/js/jquery.gritter.js",
-	"${contextPath}/static/assets/js/date-time/bootstrap-datepicker.js",
-	"${contextPath}/static/assets/js/date-time/locales/bootstrap-datepicker.zh-CN.js",
-	"${contextPath}/static/assets/js/select2.js","${contextPath}/static/assets/js/x-editable/bootstrap-editable.js",
-	"${contextPath}/static/assets/js/x-editable/ace-editable.js", null]
+	var scripts = [null,"${contextPath}/static/assets/js/jquery-ui.custom.js","${contextPath}/static/assets/js/jquery.ui.touch-punch.js","${contextPath}/static/assets/js/jquery.gritter.js","${contextPath}/static/assets/js/date-time/bootstrap-datepicker.js","${contextPath}/static/assets/js/date-time/locales/bootstrap-datepicker.zh-CN.js","${contextPath}/static/assets/js/select2.js","${contextPath}/static/assets/js/x-editable/bootstrap-editable.js","${contextPath}/static/assets/js/x-editable/ace-editable.js", null]
 	$('.page-content-area').ace_ajax('loadScripts', scripts, function() {
 	    //inline scripts related to this page
 	    jQuery(function($) {
@@ -678,8 +682,7 @@
 	            $('.user-profile').parent().addClass('hide');
 	            $('#user-profile-' + which).parent().removeClass('hide');
 	        });
-				
-			$('[data-toggle="buttons"] .btn').click();
+
 	        /////////////////////////////////////
 	        $(document).one('ajaxloadstart.page', function(e) {
 	            //in ajax mode, remove remaining elements before leaving page

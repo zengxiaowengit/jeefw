@@ -14,8 +14,7 @@ import com.jeefw.model.sys.param.AuthorityParameter;
 
 /**
  * 菜单的实体类
- * @框架唯一的升级和技术支持地址：http://shop111863449.taobao.com
- */
+ **/
 @Entity
 @Table(name = "authority")
 @Cache(region = "all", usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)

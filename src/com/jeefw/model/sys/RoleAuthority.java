@@ -14,7 +14,6 @@ import com.jeefw.model.sys.param.RoleAuthorityParameter;
 
 /**
  * 角色权限的实体类
- * @框架唯一的升级和技术支持地址：http://shop111863449.taobao.com
  */
 @Entity
 @Table(name = "role_authority")

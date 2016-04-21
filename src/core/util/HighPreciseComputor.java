@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 
 /**
  * 精度运算
- * @框架唯一的升级和技术支持地址：http://shop111863449.taobao.com
  */
 public class HighPreciseComputor {
 

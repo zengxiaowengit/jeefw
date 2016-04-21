@@ -85,13 +85,13 @@ var map = new BMap.Map("contentmap",
 				     
 				     div.onclick = function(e){
 				     	var src = $(e.srcElement).html();
-				     	console.log(src);
+				     	//console.log(src);
 					  	var x = map.getOverlays();
-						console.log(x);
+						//console.log(x);
 						$.each(x,function(){
 							if(this._text==src){
 								urlString = "${contextPath}/sys/buildinginfo/getbuildingid/"+this._point.lng+"/"+this._point.lat+"/1";
-								console.log(urlString);
+								//console.log(urlString);
 								$.ajax({
 									dataType : "json",
 									url : urlString,

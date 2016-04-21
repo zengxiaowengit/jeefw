@@ -19,7 +19,6 @@ import org.apache.commons.logging.LogFactory;
 
 /**
  * 修改自Apache的BeanUtils，更简便操作Bean类
- * @框架唯一的升级和技术支持地址：http://shop111863449.taobao.com
  */
 public class BeanUtils {
 
