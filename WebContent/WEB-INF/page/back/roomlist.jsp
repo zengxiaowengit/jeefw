@@ -266,7 +266,9 @@
                 complete: function(msg) {
                 	var returninfo = eval("(" + msg.responseText + ")");
 					if (returninfo.result == 1) {
+						//console.log("删除room成功.");
 						ttr.empty();
+						//location.reload();
 						//location.replace(location.href);
 					} else {
 						console.log(returninfo.result);
