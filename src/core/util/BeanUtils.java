@@ -29,7 +29,7 @@ public class BeanUtils {
 			return (new java.util.HashMap());
 		}
 		Map description = new HashMap();
-		if (bean instanceof DynaBean) {
+		if (bean instanceof DynaBean) {//DynaBean就是类似于map的JavaBean
 			DynaProperty[] descriptors = ((DynaBean) bean).getDynaClass().getDynaProperties();
 			for (int i = 0; i < descriptors.length; i++) {
 				String name = descriptors[i].getName();

@@ -1,5 +1,7 @@
 package com.jeefw.service.sys.impl;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -23,5 +25,11 @@ public class RoomUseInfoServiceImpl extends BaseService<RoomUseInfo> implements 
 	public void setRoomUseInfoDao(RoomUseInfoDao roomUseInfoDao) {
 		this.roomUseInfoDao = roomUseInfoDao;
 		this.dao = roomUseInfoDao;
+	}
+
+	@Override
+	public List<RoomUseInfo> CreateHQLQuery(String hql) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

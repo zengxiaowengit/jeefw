@@ -283,15 +283,15 @@
 							<div class="navbar-fixed-top align-right">
 								<br />
 								&nbsp;
-								<a id="btn-login-dark" href="#">花瓣</a>
+								<a id="btn-login-dark" href="#">Yosemite</a>
 								&nbsp;
 								<span class="blue">/</span>
 								&nbsp;
-								<a id="btn-login-blur" href="#">风车</a>
+								<a id="btn-login-blur" href="#">EarthAndMoon</a>
 								&nbsp;
 								<span class="blue">/</span>
 								&nbsp;
-								<a id="btn-login-light" href="#">阳光</a>
+								<a id="btn-login-light" href="#">Beach</a>
 								&nbsp; &nbsp; &nbsp;
 							</div>
 						</div>

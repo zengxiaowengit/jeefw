@@ -4,6 +4,7 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -12,10 +13,9 @@ import javax.persistence.TemporalType;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.GenericGenerator;
 
 import com.jeefw.model.sys.param.CompanyInfoParameter;
-
-import core.support.ExtJSBaseParameter;
 
 /**
  * CompanyInfo entity. @author MyEclipse Persistence Tools
@@ -26,15 +26,15 @@ import core.support.ExtJSBaseParameter;
 @JsonIgnoreProperties(value = { "maxResults", "firstResult", "topCount", "sortColumns", "cmd", "queryDynamicConditions", "sortedConditions", "dynamicProperties", "success", "message", "sortColumnsString", "flag" })
 public class CompanyInfo extends CompanyInfoParameter {
 
-	// Fields
-
+	
+	private static final long serialVersionUID = 1L;
 	private Integer id;
 	private String taxpayerIndentifyNumber;
 	private String taxpayerName;
 	private String taxpayerStatus;
 	private String taxSubjectRegisterType;
 	private String registerType;
-	private String localContryType;
+	private String localCountryType;
 	private String subordinateRelation;
 	private String industry;
 	private String registerAdress;
@@ -122,7 +122,7 @@ public class CompanyInfo extends CompanyInfoParameter {
 		this.taxpayerStatus = taxpayerStatus;
 		this.taxSubjectRegisterType = taxSubjectRegisterType;
 		this.registerType = registerType;
-		this.localContryType = localContryType;
+		this.localCountryType = localContryType;
 		this.subordinateRelation = subordinateRelation;
 		this.industry = industry;
 		this.registerAdress = registerAdress;
@@ -165,7 +165,9 @@ public class CompanyInfo extends CompanyInfoParameter {
 	}
 
 	// Property accessors
+	@GenericGenerator(name = "generator", strategy = "increment")
 	@Id
+	@GeneratedValue(generator = "generator")
 	@Column(name = "id", unique = true, nullable = false)
 	public Integer getId() {
 		return this.id;
@@ -222,11 +224,11 @@ public class CompanyInfo extends CompanyInfoParameter {
 
 	@Column(name = "local_contry_type", length = 20)
 	public String getLocalContryType() {
-		return this.localContryType;
+		return this.localCountryType;
 	}
 
 	public void setLocalContryType(String localContryType) {
-		this.localContryType = localContryType;
+		this.localCountryType = localContryType;
 	}
 
 	@Column(name = "subordinate_relation", length = 20)

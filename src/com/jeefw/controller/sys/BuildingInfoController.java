@@ -42,8 +42,6 @@ public class BuildingInfoController extends JavaEEFrameworkBaseController<Buildi
 	@Resource
 	private BuildingInfoService buildingInfoService;
 	@Resource
-	private AuthorityService authorityService;
-	@Resource
 	private CertificateTypeInfoService certificateTypeInfoService;
 	
 	// 保存建筑的实体Bean

@@ -12003,7 +12003,7 @@ td .lbl:only-child {
   opacity: 0.8;
 }
 .login-layout {
-  background: white url('images/Beach.jpg') no-repeat;
+  background: white url('images/Yosemite.jpg') no-repeat;
 }
 .login-layout .main-container:before {
   display: none;
@@ -12163,7 +12163,7 @@ td .lbl:only-child {
   }
 }
 .light-login {
-  background: white url('images/dfd.jpg') no-repeat;
+  background: white url('images/Beach.jpg') no-repeat;
 }
 .blur-login  {
   background: white url('images/EarthandMoon.jpg') no-repeat;

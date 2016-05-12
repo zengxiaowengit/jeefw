@@ -47,7 +47,7 @@
 			<div class="widget-main no-padding">
 				<form class="form-horizontal" role="form">
 					<div class="hr hr-18 dotted hr-double"></div>
-					<div class="form-group">
+					<div class="form-group" style="height:60px;">
 						<label class="col-xs-1 control-label no-padding-right"
 							for="username">使用名称<font color="red">*</font>
 						</label>
@@ -81,7 +81,7 @@
 						</div>
 					</div>
 					
-					<div class="form-group">
+					<div class="form-group" style="height:60px;">
 						<label class="col-xs-1 control-label no-padding-right"
 							for="usetype">使用类型<font color="red">*</font>
 						</label>
@@ -115,7 +115,7 @@
 					
 					<div class='chuzu' <c:if test="${info.useType ne '出租'}">hidden</c:if>>
 					<div class="hr hr-18 dotted hr-double"></div>
-					<div class="form-group">
+					<div class="form-group"  style="height:60px;">
 						<label class="col-xs-1 control-label no-padding-right"
 							for="usetype">出租名称<font color="red">*</font>
 						</label>
@@ -181,7 +181,7 @@
 					
 					<div class='ziyong' <c:if test="${info.useType=='出租'}">hidden</c:if>>
 					<div class="hr hr-18 dotted hr-double"></div>
-					<div class="form-group">
+					<div class="form-group"  style="height:60px;">
 						<label class="col-xs-1 control-label no-padding-right"
 							for="originalvalue">房产原值<font color="red">*</font>
 						</label>

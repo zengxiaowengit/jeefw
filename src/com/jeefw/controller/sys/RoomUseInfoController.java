@@ -25,6 +25,8 @@ import com.jeefw.service.sys.RoomInfoService;
 import com.jeefw.service.sys.RoomUseInfoService;
 import com.jeefw.service.sys.TaxRateInfoService;
 
+import core.support.BaseParameter;
+
 
 @Controller
 @RequestMapping("/sys/roomuseinfo")
@@ -97,4 +99,12 @@ public class RoomUseInfoController extends JavaEEFrameworkBaseController<RoomUse
 
 		writeJSON(response, result);
 	}
+	@RequestMapping(value="/query", method = { RequestMethod.POST, RequestMethod.GET })
+	public void RoomUseConditionQuery(BaseParameter parm, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		parm.setFlag("OR");
+		//parm.setDynamicProperties();
+	}
+		
+		
+	
 }
