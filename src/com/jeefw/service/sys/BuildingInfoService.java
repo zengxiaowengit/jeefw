@@ -10,6 +10,6 @@ import core.service.Service;
 
 public interface BuildingInfoService extends Service<BuildingInfo>{
 	
-	public List<BuildingInfo> CreateHQLQuery(String hql);
+	public List CreateHQLQuery(String hql);
 	
 }

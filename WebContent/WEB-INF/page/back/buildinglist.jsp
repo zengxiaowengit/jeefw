@@ -303,7 +303,7 @@ function() {
             
         });
         //删除一行
-        $(document).on('click', '#queryBuildingTable td div .red i',
+        $(document).on('click', 'td div .red i',
         function() {
             var ttr = $(this).closest('tr');
             console.log($(ttr).children().children().children("input[id='b0']").val());
@@ -336,7 +336,7 @@ function() {
         });
     });
     //修改信息
-    $(document).on('click', '#queryBuildingTable td div .green i',
+    $(document).on('click', 'td div .green i',
     function() {
         ttr = $(this).closest('tr');
         $('#modal-form #id').val($(ttr).children().children().children("input[id='b0']").val());

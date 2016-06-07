@@ -4,7 +4,6 @@
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}"></c:set>
 
-
 <div class="page-header">
 	<h1>
 		楼宇信息 <small> <i class="ace-icon fa fa-angle-double-right"></i>
@@ -42,13 +41,12 @@
 </div>
 
 
-
-
 <script type="text/javascript">
 	var scripts = [null ];
 	$('.page-content-area').ace_ajax('loadScripts', scripts, function() {
 		// inline scripts related to this page
 		jQuery(function($) {
+			//选择楼层
 			$(".btn.btn-lg.btn-primary").bind("click", function() {
 				floor=$(this).val();
 				str = window.location.hash;

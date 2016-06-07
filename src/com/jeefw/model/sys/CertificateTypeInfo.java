@@ -36,6 +36,12 @@ public class CertificateTypeInfo extends ExtJSBaseParameter {
 	@JsonIgnore
 	private Set<BuildingInfo> buildingInfos = new HashSet<BuildingInfo>(0);
 
+	// Property accessors
+	@Id
+	@Column(name = "certificate_type_code", unique = true, nullable = false)
+	public Integer getCertificateTypeCode() {
+		return this.certificateTypeCode;
+	}
 	// Constructors
 
 	/** default constructor */
@@ -57,12 +63,6 @@ public class CertificateTypeInfo extends ExtJSBaseParameter {
 		this.buildingInfos = buildingInfos;
 	}
 
-	// Property accessors
-	@Id
-	@Column(name = "certificate_type_code", unique = true, nullable = false)
-	public Integer getCertificateTypeCode() {
-		return this.certificateTypeCode;
-	}
 
 	public void setCertificateTypeCode(Integer certificateTypeCode) {
 		this.certificateTypeCode = certificateTypeCode;

@@ -2,14 +2,14 @@ package com.jeefw.controller.sys;
 
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.jeefw.model.sys.CertificateTypeInfo;
+import com.jeefw.service.sys.CertificateTypeInfoService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Controller;
@@ -25,8 +25,6 @@ import com.jeefw.service.sys.RoomInfoService;
 import com.jeefw.service.sys.RoomUseInfoService;
 import com.jeefw.service.sys.TaxRateInfoService;
 
-import core.support.BaseParameter;
-
 
 @Controller
 @RequestMapping("/sys/roomuseinfo")
@@ -38,6 +36,8 @@ public class RoomUseInfoController extends JavaEEFrameworkBaseController<RoomUse
 	private RoomInfoService RoomInfoService;
 	@Resource
 	private TaxRateInfoService taxRateInfoService;
+	@Resource
+	private CertificateTypeInfoService certificateTypeInfoService;
 	@RequestMapping(value="/add/{roomId}", method = { RequestMethod.POST, RequestMethod.GET })
 	public void RoomUseInfoAdd(RoomUseInfo entity, @PathVariable int roomId, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		Map<String, Object> result = new HashMap<String, Object>();
@@ -99,12 +99,47 @@ public class RoomUseInfoController extends JavaEEFrameworkBaseController<RoomUse
 
 		writeJSON(response, result);
 	}
-	@RequestMapping(value="/query", method = { RequestMethod.POST, RequestMethod.GET })
-	public void RoomUseConditionQuery(BaseParameter parm, HttpServletRequest request, HttpServletResponse response) throws Exception {
-		parm.setFlag("OR");
-		//parm.setDynamicProperties();
+
+	@RequestMapping(value="/conditionQuery", method = { RequestMethod.POST, RequestMethod.GET })
+	public void RoomUseInfoConditionQuery(RoomUseInfo info,HttpServletRequest request, HttpServletResponse response)throws Exception{
+		List<RoomUseInfo> list;
+		Map<String,Integer> result = new HashMap<String, Integer>();
+		try{
+			list = roomUseInfoService.doQuery(info);
+			writeJSON(response, list);
+
+		}catch(Exception e){
+			writeJSON(response,null);
+		}
+
 	}
-		
-		
-	
+
+	@RequestMapping(value="/queryall", method = { RequestMethod.POST, RequestMethod.GET })
+	public void RoomUseInfoQueryAll(HttpServletRequest request, HttpServletResponse response)throws Exception{
+		List<RoomUseInfo> list;
+		Map<String,Integer> result = new HashMap<String, Integer>();
+		try{
+			list = roomUseInfoService.doQueryAll();
+			result.put("result", 1);
+			request.setAttribute("list",list);
+			writeJSON(response,list);
+
+		}catch(Exception e){
+			request.setAttribute("list",null);
+			result.put("result", -1);
+			writeJSON(response,result);
+		}
+	}
+
+	@RequestMapping(value="/getcertificatetypeinfo", method = { RequestMethod.POST, RequestMethod.GET })
+	public void getCertificateTypeInfo(HttpServletRequest request, HttpServletResponse response)throws Exception {
+		List<CertificateTypeInfo> list;
+		try{
+			list = certificateTypeInfoService.doQueryAll();
+			writeJSON(response,list);
+		}catch( Exception e){
+
+		}
+
+	}
 }

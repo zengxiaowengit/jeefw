@@ -287,5 +287,4 @@ public interface Service<E> {
 	 */
 	public QueryResult<E> doPaginationQuery(BaseParameter parameter, boolean bool);
 
-	//public String ConstructConQueryHql(BaseParameter parameter);
 }
