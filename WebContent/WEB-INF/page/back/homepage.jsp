@@ -7,8 +7,6 @@
 <div id="contentmap" class="col-xs-12" style="height:550px"></div>
 
 
-
-
 <script type="text/javascript" src="${contextPath}/static/assets/js/BaiduMap.js"></script>
 
 <script type="text/javascript">
@@ -30,8 +28,8 @@ var map = new BMap.Map("contentmap",
 			success: function(msg) {
 				 $.each(msg,function(idx,item){     
   				 	point = new BMap.Point(item.longitude,item.latitude);
-  				 	var marker = new BMap.Marker(point);
-					map.addOverlay(marker);
+  				 	//var marker = new BMap.Marker(point);
+					//map.addOverlay(marker);
 					
 					//添加复杂覆盖物。
 					function ComplexCustomOverlay(point, text, mouseoverText){
@@ -48,7 +46,7 @@ var map = new BMap.Map("contentmap",
 				      div.style.backgroundColor = "#EE5D5B";
 				      div.style.border = "1px solid #BC3B3A";
 				      div.style.color = "white";
-				      div.style.height = "18px";
+				      div.style.height = "24px";
 				      div.style.padding = "2px";
 				      div.style.lineHeight = "18px";
 				      div.style.whiteSpace = "nowrap";
@@ -82,7 +80,7 @@ var map = new BMap.Map("contentmap",
 				        this.getElementsByTagName("span")[0].innerHTML = that._text;
 				        arrow.style.backgroundPosition = "0px 0px";
 				      }
-				     
+				     //覆盖物点击事件
 				     div.onclick = function(e){
 				     	var src = $(e.srcElement).html();
 				     	//console.log(src);
@@ -100,7 +98,7 @@ var map = new BMap.Map("contentmap",
 										var returninfo = eval("(" + xmlRequest.responseText + ")");
 										console.log(returninfo.result);
 										if (returninfo.result > 0 ) {
-											urlString = "${contextPath}/sys/sysuser/home#page/roomnav/"+returninfo.result;
+											urlString = "${contextPath}/sys/sysuser/home#page/buildingcount/"+returninfo.result;
 											location.href=urlString;
 										} else {
 											alert("导航失败！");

@@ -68,6 +68,7 @@
 					        <i id='roomdelete' class='ace-icon fa fa-trash-o bigger-130'></i>
 					      </a>
 					    </div>
+						</td>
 					</tr>
 
             </c:forEach>
@@ -202,7 +203,7 @@
         	
         });
         //修改房间
-        $(document).on('click', '#queryRoomTable td div .green i',
+        $(document).on('click', 'td div .green i',
 	    function() {
 	    	$("#addflag").attr("value","edit");
 	    	$("#modal-form-add #modal-title").html("修改房间信息");
@@ -251,7 +252,7 @@
 		});
 		
 		//删除房间
-        $(document).on('click', '#queryRoomTable td div .red i',function() {
+        $(document).on('click', 'td div .red i',function() {
 	    	var ttr = $(this).closest('tr');
             //console.log($(ttr).children().children().children("input[id='roomid']").val());
             urlString = "${contextPath}/sys/roominfo/deleteroominfo/"+

@@ -148,7 +148,7 @@
 				</div>
 			</div>
 			<div class="clearfix form-actions">
-				<div class="col-md-offset-4 col-md-9">
+				<div class="col-md-offset-3 col-md-9">
 					<button id="save" class="btn btn-info" type="button" >
 						<i class="ace-icon fa fa-check bigger-110"></i> Submit
 					</button>

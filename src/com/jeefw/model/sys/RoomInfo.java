@@ -37,7 +37,6 @@ public class RoomInfo extends RoomInfoParameter{
 	// Fields
 
 	private Integer id;
-	@JsonBackReference
 	private BuildingInfo buildingInfo;
 	private Integer floor;
 	private String roomNumber;

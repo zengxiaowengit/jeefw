@@ -34,7 +34,6 @@ public class RoomUseInfo extends RoomUseInfoParameter{
 
 	private Integer id;
 	private SysUser sysUser;
-	@JsonBackReference
 	private RoomInfo roomInfo;
 	private Date timeStamp;
 	private Integer valid;
