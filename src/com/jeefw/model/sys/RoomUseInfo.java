@@ -13,7 +13,6 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import org.codehaus.jackson.annotate.JsonBackReference;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -60,10 +59,18 @@ public class RoomUseInfo extends RoomUseInfoParameter{
 	private double taxYear;
 	private Date taxDeadline;
 
+	//用于通知公告的buildingid 和平均值计算
+	private int bid;
+	private double avg;
 	// Constructors
 
-	/** default constructor */
-	public RoomUseInfo() {
+	public RoomUseInfo(){
+
+	}
+	public RoomUseInfo(int bid,double avg, RoomInfo roomInfo){
+		this.bid = bid;
+		this.avg = avg;
+		this.roomInfo = roomInfo;
 	}
 
 	/** minimal constructor */
@@ -376,4 +383,19 @@ public class RoomUseInfo extends RoomUseInfoParameter{
 		this.taxDeadline = taxDeadline;
 	}
 
+	public int getBid() {
+		return bid;
+	}
+
+	public void setBid(int bid) {
+		this.bid = bid;
+	}
+
+	public double getAvg() {
+		return avg;
+	}
+
+	public void setAvg(double avg) {
+		this.avg = avg;
+	}
 }

@@ -17,6 +17,9 @@ public class RoomUseInfoParameter extends ExtJSBaseParameter{
 	private String $eq_houseTaxPerson;
 	private String $eq_houseTaxCertificateTypeName;
 	private String $eq_houseTaxCertificateNumber;
+
+
+
 	public String get$eq_houseTaxPerson() {
 		return $eq_houseTaxPerson;
 	}
@@ -88,4 +91,6 @@ public class RoomUseInfoParameter extends ExtJSBaseParameter{
 	public void set$eq_lessorCertificateNumber(String $eq_lessorCertificateNumber) {
 		this.$eq_lessorCertificateNumber = $eq_lessorCertificateNumber;
 	}
+
+
 }

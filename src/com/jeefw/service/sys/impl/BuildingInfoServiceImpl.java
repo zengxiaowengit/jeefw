@@ -44,5 +44,5 @@ public class BuildingInfoServiceImpl extends BaseService<BuildingInfo> implement
 		Query query = getSession().createQuery(hql);
 		return query.list();
 	}
-	
+
 }

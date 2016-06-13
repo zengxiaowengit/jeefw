@@ -7,13 +7,6 @@
 <script src="${contextPath}/static/assets/js/echarts.common.min.js"></script>
 
 
-<div class="page-header">
-  <h1>
-    楼宇信息 <small> <i class="ace-icon fa fa-angle-double-right"></i>
-    概况展示
-  </small>
-  </h1>
-</div>
 
 
 <div id="building-num" class="col-xs-6" style="width: 50%;height: 300px;position: relative"></div>

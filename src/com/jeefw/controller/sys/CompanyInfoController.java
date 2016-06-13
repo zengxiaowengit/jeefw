@@ -24,15 +24,15 @@ public class CompanyInfoController extends JavaEEFrameworkBaseController<Company
 	@Resource
 	private CompanyInfoService companyInfoService;
 	
+	@Override
 	@RequestMapping(value = "/savecompanyinfo", method = { RequestMethod.POST, RequestMethod.GET })
 	public void doSave(CompanyInfo entity, HttpServletRequest request, HttpServletResponse response) throws IOException {
 		Map<String, Object> result = new HashMap<String, Object>();
 		try{ 
-			if(entity.getCmd()!= null && entity.getCmd().equals("edit")){
-				
+			if(entity.getCmd()!= null && entity.getCmd().equals("edit")) {
 				companyInfoService.update(entity);
 			}
-			else{
+			else {
 				companyInfoService.persist(entity);
 			}
 			result.put("result", 1);
@@ -41,9 +41,5 @@ public class CompanyInfoController extends JavaEEFrameworkBaseController<Company
 		}	
 		writeJSON(response, result);
 	}
-	
-	@RequestMapping(value = "/query", method = { RequestMethod.POST, RequestMethod.GET })
-	public void doQueryByCondition(BaseParameter parm, HttpServletRequest request, HttpServletResponse response) throws IOException {
-		
-	}
+
 }

@@ -82,6 +82,12 @@ public class SysUserController extends JavaEEFrameworkBaseController<SysUser> im
     private RoomUseInfoService roomUseInfoService;
     @Resource
     private TaxRateInfoService taxRateInfoService;
+    @Resource
+    private CompanyInfoService companyInfoService;
+    @Resource
+    private NoticeInfoService noticeInfoService;
+    @Resource
+    private WarningInfoService warningInfoService;
 
     private static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -424,6 +430,8 @@ public class SysUserController extends JavaEEFrameworkBaseController<SysUser> im
         } else {
             SysUser sysUser = (SysUser) request.getSession().getAttribute(SESSION_SYS_USER);
             String globalRoleKey = sysUser.getRole();
+            request.setAttribute("warningInfoList",warningInfoService.doQueryAll());
+            request.setAttribute("noticeInfoList",noticeInfoService.doQueryAll());
             try {
                 Authentication authentication = new UsernamePasswordAuthenticationToken(sysUser.getEmail(), sysUser.getPassword(), AuthorityUtils.createAuthorityList(globalRoleKey));
                 SecurityContextHolder.getContext().setAuthentication(authentication);
@@ -549,6 +557,11 @@ public class SysUserController extends JavaEEFrameworkBaseController<SysUser> im
         List list = taxRateInfoService.doQueryAll();
         request.setAttribute("taxRateInfoList",list );
         return "back/taxratemanage";
+    }
 
+    @RequestMapping(value = "/companyinfoquery", method = { RequestMethod.POST, RequestMethod.GET })
+    public String doQuery(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        request.setAttribute("companyInfoList",companyInfoService.doQueryAll());
+        return "back/companylist";
     }
 }

@@ -12,9 +12,9 @@
 
 	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
 		<property name="driverClass" value="com.mysql.jdbc.Driver" />
-		<property name="jdbcUrl" value="jdbc:mysql://localhost:3307/jeefw?useUnicode=true&amp;characterEncoding=utf-8" />
-		<property name="user" value="root" />
-		<property name="password" value="admin" />
+		<property name="jdbcUrl" value="jdbc:mysql://w.rdc.sae.sina.com.cn:3307/app_jeefw?useUnicode=true&amp;characterEncoding=utf-8" />
+		<property name="user" value="lj0201zj41" />
+		<property name="password" value="00ww2w3wxj4x2y2jl1m0z44l3iwi505210klykjw" />
 		<!-- SQL Server数据库配置 -->
 		<!--
 		<property name="driverClass" value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />
@@ -107,6 +107,31 @@
 		</property>
 	</bean>
 -->
+	<bean id="NoticeInfoJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="noticeInfoServiceImpl" />
+		<property name="targetMethod" value="GenerateNoticeInfo"/>
+	</bean>
+	<bean id="NoticeInfoJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="NoticeInfoJob" />
+		<property name="cronExpression" value="0 0 2 * * ?" />
+	</bean>
+
+	<bean id="WarningInfoInfoJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="warningInfoServiceImpl" />
+		<property name="targetMethod" value="GenerateWarnInfo"/>
+	</bean>
+	<bean id="WarningInfoJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="WarningInfoInfoJob" />
+		<property name="cronExpression" value="0 0 2 * * ?" />
+	</bean>
+	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean" lazy-init="false">
+		<property name="triggers">
+			<list>
+				<ref bean="NoticeInfoJobTrigger" />
+				<ref bean="WarningInfoJobTrigger"/>
+			</list>
+		</property>
+	</bean>
 	<bean id="updateUserPwdLogicBean" class="com.app.logic.UpdateUserPwdLogicServer" />
 
 	<!-- 配置业务逻辑池 -->

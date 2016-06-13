@@ -29,7 +29,7 @@ public class NoticeInfo extends ExtJSBaseParameter {
 	private Integer id;
 	private Date timeStamp;
 	private String noticeType;
-	private Integer roomId;
+	private Integer roomUseId;
 	private String noticeContent;
 	private Integer mark;
 
@@ -44,7 +44,7 @@ public class NoticeInfo extends ExtJSBaseParameter {
 			String noticeContent, Integer mark) {
 		this.timeStamp = timeStamp;
 		this.noticeType = noticeType;
-		this.roomId = roomId;
+		this.roomUseId = roomId;
 		this.noticeContent = noticeContent;
 		this.mark = mark;
 	}
@@ -80,13 +80,13 @@ public class NoticeInfo extends ExtJSBaseParameter {
 		this.noticeType = noticeType;
 	}
 
-	@Column(name = "room_id")
-	public Integer getRoomId() {
-		return this.roomId;
+	@Column(name = "room_use_id")
+	public Integer getRoomUseId() {
+		return this.roomUseId;
 	}
 
-	public void setRoomId(Integer roomId) {
-		this.roomId = roomId;
+	public void setRoomUseId(Integer roomUseId) {
+		this.roomUseId = roomUseId;
 	}
 
 	@Column(name = "notice_content")

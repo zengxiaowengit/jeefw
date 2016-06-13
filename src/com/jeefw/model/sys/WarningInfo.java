@@ -29,7 +29,7 @@ public class WarningInfo extends ExtJSBaseParameter {
 	private Integer id;
 	private Date timeStamp;
 	private String warningType;
-	private Integer roomId;
+	private Integer roomUseId;
 	private String warningContent;
 	private Integer mark;
 
@@ -40,11 +40,11 @@ public class WarningInfo extends ExtJSBaseParameter {
 	}
 
 	/** full constructor */
-	public WarningInfo(Date timeStamp, String warningType, Integer roomId,
+	public WarningInfo(Date timeStamp, String warningType, Integer roomUseId,
 			String warningContent, Integer mark) {
 		this.timeStamp = timeStamp;
 		this.warningType = warningType;
-		this.roomId = roomId;
+		this.roomUseId = roomUseId;
 		this.warningContent = warningContent;
 		this.mark = mark;
 	}
@@ -80,13 +80,13 @@ public class WarningInfo extends ExtJSBaseParameter {
 		this.warningType = warningType;
 	}
 
-	@Column(name = "room_id")
-	public Integer getRoomId() {
-		return this.roomId;
+	@Column(name = "room_use_id")
+	public Integer getRoomUseId() {
+		return this.roomUseId;
 	}
 
-	public void setRoomId(Integer roomId) {
-		this.roomId = roomId;
+	public void setRoomUseId(Integer roomUseId) {
+		this.roomUseId = roomUseId;
 	}
 
 	@Column(name = "warning_content")
